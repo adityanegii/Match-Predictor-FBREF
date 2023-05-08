@@ -1,0 +1,56 @@
+,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,For Manchester City,SCA Types,SCA Types,SCA Types,SCA Types,SCA Types,SCA Types,SCA Types,GCA Types,GCA Types,GCA Types,GCA Types,GCA Types,GCA Types,GCA Types,Unnamed: 24_level_0
+,Date,Time,Comp,Round,Day,Venue,Result,GF,GA,Opponent,SCA,PassLive,PassDead,TO,Sh,Fld,Def,GCA,PassLive,PassDead,TO,Sh,Fld,Def,Match Report
+0,2022-07-30,17:00,Community Shield,FA Community Shield,Sat,Neutral,L,1,3,Liverpool,,,,,,,,,,,,,,,Match Report
+1,2022-08-07,16:30,Premier League,Matchweek 1,Sun,Away,W,2,0,West Ham,27.0,23.0,1.0,0.0,1.0,2.0,0.0,4.0,3.0,0.0,0.0,0.0,1.0,0.0,Match Report
+2,2022-08-13,15:00,Premier League,Matchweek 2,Sat,Home,W,4,0,Bournemouth,36.0,23.0,6.0,3.0,3.0,0.0,1.0,6.0,6.0,0.0,0.0,0.0,0.0,0.0,Match Report
+3,2022-08-21,16:30,Premier League,Matchweek 3,Sun,Away,D,3,3,Newcastle Utd,40.0,31.0,2.0,2.0,2.0,2.0,1.0,6.0,6.0,0.0,0.0,0.0,0.0,0.0,Match Report
+4,2022-08-27,15:00,Premier League,Matchweek 4,Sat,Home,W,4,2,Crystal Palace,31.0,25.0,2.0,2.0,2.0,0.0,0.0,7.0,6.0,0.0,0.0,1.0,0.0,0.0,Match Report
+5,2022-08-31,19:30,Premier League,Matchweek 5,Wed,Home,W,6,0,Nott'ham Forest,30.0,19.0,4.0,2.0,3.0,1.0,1.0,9.0,7.0,1.0,0.0,1.0,0.0,0.0,Match Report
+6,2022-09-03,17:30,Premier League,Matchweek 6,Sat,Away,D,1,1,Aston Villa,24.0,20.0,2.0,0.0,1.0,1.0,0.0,2.0,2.0,0.0,0.0,0.0,0.0,0.0,Match Report
+7,2022-09-06,21:00,Champions Lg,Group stage,Tue,Away,W,4,0,es Sevilla,46.0,35.0,2.0,3.0,3.0,2.0,1.0,7.0,5.0,0.0,1.0,1.0,0.0,0.0,Match Report
+8,2022-09-14,20:00,Champions Lg,Group stage,Wed,Home,W,2,1,de Dortmund,23.0,18.0,4.0,1.0,0.0,0.0,0.0,4.0,4.0,0.0,0.0,0.0,0.0,0.0,Match Report
+9,2022-09-17,12:30,Premier League,Matchweek 8,Sat,Away,W,3,0,Wolves,30.0,25.0,2.0,1.0,2.0,0.0,0.0,6.0,6.0,0.0,0.0,0.0,0.0,0.0,Match Report
+10,2022-10-02,14:00,Premier League,Matchweek 9,Sun,Home,W,6,3,Manchester Utd,38.0,26.0,3.0,1.0,7.0,1.0,0.0,12.0,10.0,1.0,0.0,1.0,0.0,0.0,Match Report
+11,2022-10-05,20:00,Champions Lg,Group stage,Wed,Home,W,5,0,dk FC Copenhagen,55.0,47.0,2.0,1.0,3.0,2.0,0.0,7.0,4.0,1.0,0.0,1.0,1.0,0.0,Match Report
+12,2022-10-08,15:00,Premier League,Matchweek 10,Sat,Home,W,4,0,Southampton,35.0,28.0,2.0,3.0,2.0,0.0,0.0,8.0,7.0,0.0,1.0,0.0,0.0,0.0,Match Report
+13,2022-10-11,18:45,Champions Lg,Group stage,Tue,Away,D,0,0,dk FC Copenhagen,22.0,14.0,3.0,1.0,4.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Match Report
+14,2022-10-16,16:30,Premier League,Matchweek 11,Sun,Away,L,0,1,Liverpool,30.0,26.0,3.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Match Report
+15,2022-10-22,15:00,Premier League,Matchweek 13,Sat,Home,W,3,1,Brighton,20.0,12.0,3.0,1.0,2.0,2.0,0.0,6.0,5.0,0.0,0.0,0.0,1.0,0.0,Match Report
+16,2022-10-25,21:00,Champions Lg,Group stage,Tue,Away,D,0,0,de Dortmund,14.0,10.0,2.0,0.0,0.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Match Report
+17,2022-10-29,12:30,Premier League,Matchweek 14,Sat,Away,W,1,0,Leicester City,28.0,24.0,3.0,0.0,0.0,1.0,0.0,2.0,1.0,0.0,0.0,0.0,1.0,0.0,Match Report
+18,2022-11-02,20:00,Champions Lg,Group stage,Wed,Home,W,3,1,es Sevilla,38.0,27.0,4.0,1.0,2.0,3.0,1.0,5.0,4.0,0.0,0.0,0.0,0.0,1.0,Match Report
+19,2022-11-05,15:00,Premier League,Matchweek 15,Sat,Home,W,2,1,Fulham,32.0,25.0,2.0,0.0,2.0,3.0,0.0,4.0,3.0,0.0,0.0,0.0,1.0,0.0,Match Report
+20,2022-11-09,20:00,EFL Cup,Third round,Wed,Home,W,2,0,Chelsea,,,,,,,,,,,,,,,Match Report
+21,2022-11-12,12:30,Premier League,Matchweek 16,Sat,Home,L,1,2,Brentford,51.0,43.0,2.0,0.0,5.0,0.0,1.0,2.0,1.0,1.0,0.0,0.0,0.0,0.0,Match Report
+22,2022-12-22,20:00,EFL Cup,Fourth round,Thu,Home,W,3,2,Liverpool,,,,,,,,,,,,,,,Match Report
+23,2022-12-28,20:00,Premier League,Matchweek 17,Wed,Away,W,3,1,Leeds United,47.0,33.0,5.0,1.0,4.0,3.0,1.0,5.0,3.0,0.0,0.0,1.0,0.0,1.0,Match Report
+24,2022-12-31,15:00,Premier League,Matchweek 18,Sat,Home,D,1,1,Everton,30.0,23.0,2.0,1.0,3.0,1.0,0.0,2.0,1.0,0.0,1.0,0.0,0.0,0.0,Match Report
+25,2023-01-05,20:00,Premier League,Matchweek 19,Thu,Away,W,1,0,Chelsea,20.0,15.0,0.0,3.0,1.0,0.0,1.0,2.0,2.0,0.0,0.0,0.0,0.0,0.0,Match Report
+26,2023-01-08,16:30,FA Cup,Third round proper,Sun,Home,W,4,0,Chelsea,,,,,,,,,,,,,,,Match Report
+27,2023-01-11,20:00,EFL Cup,Quarter-finals,Wed,Away,L,0,2,Southampton,,,,,,,,,,,,,,,Match Report
+28,2023-01-14,12:30,Premier League,Matchweek 20,Sat,Away,L,1,2,Manchester Utd,10.0,10.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,0.0,0.0,0.0,0.0,0.0,Match Report
+29,2023-01-19,20:00,Premier League,Matchweek 7,Thu,Home,W,4,2,Tottenham,28.0,23.0,2.0,1.0,1.0,1.0,0.0,7.0,6.0,0.0,0.0,1.0,0.0,0.0,Match Report
+30,2023-01-22,14:00,Premier League,Matchweek 21,Sun,Home,W,3,0,Wolves,26.0,22.0,0.0,1.0,1.0,1.0,1.0,6.0,4.0,0.0,0.0,0.0,1.0,1.0,Match Report
+31,2023-01-27,20:00,FA Cup,Fourth round proper,Fri,Home,W,1,0,Arsenal,,,,,,,,,,,,,,,Match Report
+32,2023-02-05,16:30,Premier League,Matchweek 22,Sun,Away,L,0,1,Tottenham,30.0,19.0,3.0,1.0,3.0,2.0,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,Match Report
+33,2023-02-12,16:30,Premier League,Matchweek 23,Sun,Home,W,3,1,Aston Villa,32.0,20.0,4.0,2.0,2.0,4.0,0.0,5.0,3.0,1.0,0.0,0.0,1.0,0.0,Match Report
+34,2023-02-15,19:30,Premier League,Matchweek 12,Wed,Away,W,3,1,Arsenal,13.0,6.0,3.0,0.0,2.0,2.0,0.0,4.0,4.0,0.0,0.0,0.0,0.0,0.0,Match Report
+35,2023-02-18,15:00,Premier League,Matchweek 24,Sat,Away,D,1,1,Nott'ham Forest,42.0,29.0,4.0,2.0,3.0,3.0,1.0,2.0,2.0,0.0,0.0,0.0,0.0,0.0,Match Report
+36,2023-02-22,21:00,Champions Lg,Round of 16,Wed,Away,D,1,1,de RB Leipzig,22.0,12.0,3.0,4.0,0.0,1.0,2.0,1.0,1.0,0.0,0.0,0.0,0.0,0.0,Match Report
+37,2023-02-25,17:30,Premier League,Matchweek 25,Sat,Away,W,4,1,Bournemouth,35.0,28.0,2.0,1.0,3.0,1.0,0.0,4.0,2.0,0.0,1.0,1.0,0.0,0.0,Match Report
+38,2023-02-28,20:00,FA Cup,Fifth round proper,Tue,Away,W,3,0,Bristol City,,,,,,,,,,,,,,,Match Report
+39,2023-03-04,12:30,Premier League,Matchweek 26,Sat,Home,W,2,0,Newcastle Utd,20.0,17.0,0.0,2.0,0.0,1.0,0.0,4.0,2.0,0.0,2.0,0.0,0.0,0.0,Match Report
+40,2023-03-11,17:30,Premier League,Matchweek 27,Sat,Away,W,1,0,Crystal Palace,24.0,15.0,1.0,4.0,2.0,2.0,0.0,2.0,0.0,1.0,0.0,0.0,1.0,0.0,Match Report
+41,2023-03-14,20:00,Champions Lg,Round of 16,Tue,Home,W,7,0,de RB Leipzig,38.0,24.0,6.0,1.0,6.0,1.0,0.0,9.0,4.0,0.0,0.0,5.0,0.0,0.0,Match Report
+42,2023-03-18,17:45,FA Cup,Quarter-finals,Sat,Home,W,6,0,Burnley,,,,,,,,,,,,,,,Match Report
+43,2023-04-01,12:30,Premier League,Matchweek 29,Sat,Home,W,4,1,Liverpool,32.0,27.0,1.0,1.0,1.0,1.0,1.0,7.0,6.0,0.0,0.0,1.0,0.0,0.0,Match Report
+44,2023-04-08,17:30,Premier League,Matchweek 30,Sat,Away,W,4,1,Southampton,25.0,21.0,2.0,0.0,1.0,1.0,0.0,7.0,5.0,0.0,0.0,1.0,1.0,0.0,Match Report
+45,2023-04-11,20:00,Champions Lg,Quarter-finals,Tue,Home,W,3,0,de Bayern Munich,29.0,26.0,1.0,1.0,1.0,0.0,0.0,6.0,5.0,0.0,1.0,0.0,0.0,0.0,Match Report
+46,2023-04-15,17:30,Premier League,Matchweek 31,Sat,Home,W,3,1,Leicester City,21.0,14.0,2.0,1.0,4.0,0.0,0.0,5.0,3.0,0.0,1.0,1.0,0.0,0.0,Match Report
+47,2023-04-19,21:00,Champions Lg,Quarter-finals,Wed,Away,D,1,1,de Bayern Munich,13.0,8.0,0.0,4.0,1.0,0.0,0.0,2.0,1.0,0.0,1.0,0.0,0.0,0.0,Match Report
+48,2023-04-22,16:45,FA Cup,Semi-finals,Sat,Neutral,W,3,0,Sheffield Utd,,,,,,,,,,,,,,,Match Report
+49,2023-04-26,20:00,Premier League,Matchweek 33,Wed,Home,W,4,1,Arsenal,24.0,16.0,2.0,4.0,1.0,1.0,0.0,7.0,5.0,1.0,0.0,0.0,1.0,0.0,Match Report
+50,2023-04-30,14:00,Premier League,Matchweek 34,Sun,Away,W,2,1,Fulham,23.0,15.0,1.0,2.0,2.0,1.0,2.0,4.0,2.0,0.0,1.0,0.0,1.0,0.0,Match Report
+51,2023-05-03,20:00,Premier League,Matchweek 28,Wed,Home,W,3,0,West Ham,30.0,22.0,3.0,1.0,1.0,2.0,1.0,6.0,4.0,1.0,0.0,0.0,1.0,0.0,Match Report
+52,2023-05-06,15:00,Premier League,Matchweek 35,Sat,Home,W,2,1,Leeds United,36.0,23.0,4.0,4.0,1.0,4.0,0.0,4.0,3.0,0.0,1.0,0.0,0.0,0.0,Match Report
+53,,,,,,,39-8-6,138,42,,1300.0,969.0,105.0,64.0,89.0,55.0,18.0,200.0,150.0,8.0,11.0,16.0,12.0,3.0,
