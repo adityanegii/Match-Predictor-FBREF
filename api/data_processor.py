@@ -43,19 +43,22 @@ def clean_data(matches_df):
     # Iterate over each group
     for team, group in grouped:
         # Find the index of the next match for the team
-        next_match_index = group[group['date'].dt.date < pd.Timestamp.now().date()].shape[0]
+        # next_match_index = group[group['date'].dt.date < pd.Timestamp.now().date()].shape[0]
+        next_match_index = group[group['date'].dt.date < pd.to_datetime("2023-05-27").dt.date].shape[0]
         if (next_match_index <= group.shape[0]):
             all_matches.append(group[:next_match_index + 1])
 
     all_matches_df = pd.concat(all_matches).sort_values(by=['team', 'date'])
 
-    next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.Timestamp.now().date()].copy()
+    # next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.Timestamp.now().date()].copy()
+    next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.to_datetime("2023-05-27").dt.date].copy()
     next_matches['match'] = next_matches[['team', 'opponent']].apply(lambda x: '_'.join(sorted(x)), axis=1)
     groups = next_matches.groupby(['date', 'time', 'match'])
     valid_matches = groups.filter(lambda x: len(x) == 2)
     valid_matches.drop(columns=['match'], inplace=True)
 
-    final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.Timestamp.now().date()], valid_matches])
+    # final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.Timestamp.now().date()], valid_matches])
+    final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.to_datetime("2023-05-27").dt.date], valid_matches])
     final_matches.sort_values(by=['team', 'date'], inplace=True)
     final_matches = final_matches.reset_index(drop=True)
 
@@ -80,9 +83,12 @@ def clean_data(matches_df):
 
     return pd.concat(dfs).sort_values(by=['team', 'date']).reset_index(drop=True)
 
-def get_overall_averages(final_matches):
+def get_overall_averages(final_matches, file=False):
     all_cols = final_matches.columns.tolist()
-    cols = all_cols[8:10] + all_cols[11:12] + all_cols[13:152] + all_cols[-1:]
+    if file:
+        cols = all_cols[8:10] + all_cols[11:12] + all_cols[13:152] + all_cols[-1:]
+    else:
+        cols = all_cols[7:9] + all_cols[10:11] + all_cols[12:151] + all_cols[-1:]
 
     rolling_averages = final_matches.groupby('team')[cols].rolling(window=5, min_periods=3, closed='left').mean()
     rolling_averages.reset_index(level=0, drop=True, inplace=True)
@@ -98,8 +104,12 @@ def combine(df):
     home_table_renamed = home_table.rename(columns={"team": "home_team", "opponent": "away_team", "gf": "gf_home", "ga": "gf_away"})
     away_table_renamed = away_table.rename(columns={"team": "away_team", "opponent": "home_team", "gf": "gf_away", "ga": "gf_home"})
 
-    return pd.merge(home_table_renamed, away_table_renamed, on=["date", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
+    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
+    merged_df["gf_home"] = merged_df["gf_home"].astype("int")
+    merged_df["gf_away"] = merged_df["gf_away"].astype("int")
+    return merged_df
+
 
 def main():
-    combine(get_overall_averages(clean_data(get_data("matches.csv")))).to_csv("cleaned_matches.csv")
+    combine(get_overall_averages(clean_data(get_data("matches.csv")))).to_csv("data/cleaned_matches.csv")
 

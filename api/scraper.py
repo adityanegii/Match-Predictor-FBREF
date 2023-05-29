@@ -7,7 +7,6 @@ from scraper_helpers import parse_def, parse_gca, parse_gk, parse_misc, parse_pa
 
 def parse_url(url, parse, text, header):
     data = requests.get(url, headers=header)
-    print(data)
     df = pd.read_html(data.text, match=text)[0]
     df = parse(df)
     return df
@@ -85,5 +84,5 @@ def scrape(years, link):
     len(all_matches)
     matches_df = pd.concat(all_matches)
     matches_df.columns = [c.lower() for c in matches_df.columns]
-    matches_df.to_csv("matches.csv")
+    matches_df.to_csv("data/matches.csv")
     return matches_df

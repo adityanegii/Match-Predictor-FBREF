@@ -80,7 +80,7 @@ def main():
     evaluate_model(train(data.dropna(), predictors, rf))
     print("------------------PREDICTING------------------")
     next_games = data[data['date'] >= pd.Timestamp.now().date()]
-    predict(data, predictors, rf).to_csv("predictions.csv", index=False)
+    predict(data, predictors, rf).to_csv("data/predictions.csv", index=False)
 
 
 
