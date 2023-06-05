@@ -5,7 +5,8 @@ from RandomForestRegressor import RFR
 from RandomForestClassifier import RFC
 from XGBRegressor import XGBR
 from XGBClassifier import XGBC
-from MLP import MLP
+from SVMClassifier import SVC
+from SVMRegressor import SVR
 
 import pandas as pd
 
@@ -65,14 +66,11 @@ def main():
     rfr = RFR()
     xgbc = XGBC()
     xgbr = XGBR()
-    # mlp = MLP()
+    svc = SVC()
+    svr = SVR()
 
-    models = [rfc, rfr, xgbc, xgbr]
-    types = ["RFC", "RFR", "XGBC", "XGBR"]
-    models = [xgbc, xgbr]
-    types = ["XGBC", "XGBR"]
-    models = [xgbc]
-    types = ["XGBC"]
+    models = [rfc, rfr, xgbc, xgbr, svc, svr]
+    types = ["RFC", "RFR", "XGBC", "XGBR", "SVC", "SVR"]
 
     for model, type in zip(models, types):
         predict(model, type, train_set, next_games, predictors)
