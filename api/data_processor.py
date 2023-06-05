@@ -31,6 +31,8 @@ def clean_data(matches_df):
     matches_df["opp_code"] = matches_df["opponent"].astype('category').cat.codes
     matches_df["hour"] = matches_df["time"].str.replace(":.+", "", regex=True).astype("int")
     matches_df["pts"] = matches_df["result"].map({'W': 3, 'D': 1, 'L': 0})
+    matches_df["gf"] = matches_df["gf"].astype("int")
+    matches_df["ga"] = matches_df["ga"].astype("int")
 
     # Get only the matches that have been played + the next match for each team
 
@@ -44,24 +46,23 @@ def clean_data(matches_df):
     for team, group in grouped:
         # Find the index of the next match for the team
         # next_match_index = group[group['date'].dt.date < pd.Timestamp.now().date()].shape[0]
-        next_match_index = group[group['date'].dt.date < pd.to_datetime("2023-05-27").dt.date].shape[0]
+        next_match_index = group[group['date'].dt.date < pd.Timestamp('2023-05-27').date()].shape[0]
         if (next_match_index <= group.shape[0]):
             all_matches.append(group[:next_match_index + 1])
 
     all_matches_df = pd.concat(all_matches).sort_values(by=['team', 'date'])
 
     # next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.Timestamp.now().date()].copy()
-    next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.to_datetime("2023-05-27").dt.date].copy()
+    next_matches = all_matches_df[all_matches_df['date'].dt.date >= pd.Timestamp('2023-05-27').date()].copy()
     next_matches['match'] = next_matches[['team', 'opponent']].apply(lambda x: '_'.join(sorted(x)), axis=1)
     groups = next_matches.groupby(['date', 'time', 'match'])
     valid_matches = groups.filter(lambda x: len(x) == 2)
     valid_matches.drop(columns=['match'], inplace=True)
 
     # final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.Timestamp.now().date()], valid_matches])
-    final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.to_datetime("2023-05-27").dt.date], valid_matches])
+    final_matches = pd.concat([all_matches_df[all_matches_df['date'].dt.date < pd.Timestamp('2023-05-27').date()], valid_matches])
     final_matches.sort_values(by=['team', 'date'], inplace=True)
     final_matches = final_matches.reset_index(drop=True)
-
 
     teams = final_matches['team'].unique().tolist()
     dfs = [final_matches[final_matches['team'] == x] for x in teams]
@@ -104,12 +105,7 @@ def combine(df):
     home_table_renamed = home_table.rename(columns={"team": "home_team", "opponent": "away_team", "gf": "gf_home", "ga": "gf_away"})
     away_table_renamed = away_table.rename(columns={"team": "away_team", "opponent": "home_team", "gf": "gf_away", "ga": "gf_home"})
 
-    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
-    merged_df["gf_home"] = merged_df["gf_home"].astype("int")
-    merged_df["gf_away"] = merged_df["gf_away"].astype("int")
+    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "round", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
+    merged_df['result_code'] = (merged_df['gf_home'] > merged_df['gf_away']).astype(int)  # 1 for home team win, 0 for draw, -1 for away team win
+
     return merged_df
-
-
-def main():
-    combine(get_overall_averages(clean_data(get_data("matches.csv")))).to_csv("data/cleaned_matches.csv")
-

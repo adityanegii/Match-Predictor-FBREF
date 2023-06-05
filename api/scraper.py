@@ -7,6 +7,8 @@ from scraper_helpers import parse_def, parse_gca, parse_gk, parse_misc, parse_pa
 
 def parse_url(url, parse, text, header):
     data = requests.get(url, headers=header)
+    if (data.status_code != 200):
+        print(f"Error: {data.status_code}")
     df = pd.read_html(data.text, match=text)[0]
     df = parse(df)
     return df
