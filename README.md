@@ -19,4 +19,5 @@ This Match Predictor is a Python-based tool that uses various classifiers and re
 ## Acknowledgements
 
 - The Match Predictor utilizes the scikit-learn and XGBoost libraries for machine learning models.
+- It uses the pandas library to organize data and the bs4, and requests library to scrape the data.
 - The data used in the predictor is sourced from FBREF (https://fbref.com/).
