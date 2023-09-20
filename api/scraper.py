@@ -86,5 +86,7 @@ def scrape(years, link):
     len(all_matches)
     matches_df = pd.concat(all_matches)
     matches_df.columns = [c.lower() for c in matches_df.columns]
-    matches_df.to_csv("data/matches.csv")
+
+    matches_df["date"] = pd.to_datetime(matches_df["date"])
+    matches_df.to_csv("data/matches.csv", index=False)
     return matches_df

@@ -2,8 +2,11 @@ from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
 
 class XGBC():
-    def __init__(self):
-        self.model = XGBClassifier(n_estimators=4000, subsample=0.95, random_state=42)
+    def __init__(self, params=None):
+        if params:
+            self.model = XGBClassifier(**params)
+        else:
+            self.model = XGBClassifier(n_estimators=4000, subsample=0.95, random_state=42)
         
     def train(self, data, predictors):
         X = data[predictors]
@@ -42,7 +45,8 @@ class XGBC():
     def evaluate_model(self, df):
         correct_results = df[df["Predicted_Result"] == df["Actual_Result"]].shape[0]
         total_games = df.shape[0]
-        print("correct results:", correct_results/total_games)
+
+        return correct_results/total_games
 
 
 

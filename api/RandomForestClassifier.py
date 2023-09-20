@@ -1,9 +1,12 @@
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
 
 class RFC():
-    def __init__(self):
-        self.model = RandomForestClassifier(n_estimators=2400, min_samples_split=150, min_samples_leaf=10, random_state=42)
+    def __init__(self, params=None):
+        if params:
+            self.model = RandomForestClassifier(**params)
+        else:
+            self.model = RandomForestClassifier(n_estimators=2400, min_samples_split=150, min_samples_leaf=10, random_state=42)
         
     def train(self, data, predictors):
         X = data[predictors]
@@ -42,7 +45,7 @@ class RFC():
     def evaluate_model(self, df):
         correct_results = df[df["Predicted_Result"] == df["Actual_Result"]].shape[0]
         total_games = df.shape[0]
-        print("correct results:", correct_results/total_games)
+        return correct_results/total_games
 
 
 

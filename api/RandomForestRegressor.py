@@ -1,9 +1,12 @@
-from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
 
 class RFR():
-    def __init__(self):
-        self.model = RandomForestRegressor(n_estimators=2400, min_samples_split=150, min_samples_leaf=10, random_state=42)
+    def __init__(self, params=None):
+        if params:
+            self.model = RandomForestRegressor(**params)
+        else:
+            self.model = RandomForestRegressor(n_estimators=2400, min_samples_split=150, min_samples_leaf=10, random_state=42)
         
     def train(self, data, predictors):
         X = data[predictors]
@@ -54,11 +57,11 @@ class RFR():
         correct_away_wins = df[(df["Predicted_GF_Home"] < df["Predicted_GF_Away"]) & (df["Actual_GF_Home"] < df["Actual_GF_Away"])].shape[0]
         correct_draws = df[(df["Predicted_GF_Home"] == df["Predicted_GF_Away"]) & (df["Actual_GF_Home"] == df["Actual_GF_Away"])].shape[0]
         total_games = df.shape[0]
-        print("correct scores:", correct_scores/total_games)
-        print("correct home wins:", correct_home_wins/total_games)
-        print("correct away wins:", correct_away_wins/total_games)
-        print("correct draws:", correct_draws/total_games)
-        print("correct results:", (correct_home_wins + correct_away_wins + correct_draws)/total_games)
+
+        c_scores = correct_scores/total_games
+        c_r = (correct_home_wins + correct_away_wins + correct_draws)/total_games
+
+        return c_scores, c_r
 
 
 

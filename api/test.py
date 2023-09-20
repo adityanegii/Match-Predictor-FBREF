@@ -6,6 +6,10 @@ import data_processor as DP
 import numpy as np
 from xgboost import XGBRegressor
 from xgboost import XGBClassifier
+from sklearn import svm
+
+
+from constants import DATE
 
 def process(df, file=False):
     r_df = DP.combine(DP.get_overall_averages(DP.clean_data(df), file))
@@ -32,6 +36,8 @@ def get_predictors():
 
 def test_rf():
     matches_df = pd.read_csv("data/matches.csv")
+    matches_df["date"] = pd.to_datetime(matches_df["date"])
+    matches_df = matches_df[matches_df["date"] < DATE]
     data = process(matches_df, True)
 
     predictors = get_predictors()
@@ -101,84 +107,11 @@ def test_rf():
     print("Best score params:", rf_best_scoreline_params)
     print("Correct home wins:", rf_best_scoreline_scores[0], "Correct away wins:", rf_best_scoreline_scores[1], "Correct draws:", rf_best_scoreline_scores[2], "Correct scores:", rf_best_scoreline_scores[3])
     
-
-def test_mlp():
-    matches_df = pd.read_csv("data/matches.csv")
-    data = process(matches_df, True)
-
-    predictors = get_predictors()
-
-    data.dropna(inplace=True)
-    X = data[predictors]
-    y = data[["gf_home", "gf_away"]]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-
-    param_grid_mlp = {
-    'hidden_layer_sizes': [(50, 50), (25, 25), (75, 75), (100, 100), (100, 25), (25, 100), (50, 100), (100, 50), (50, 50, 50), (25, 25, 25), (75, 75, 75), (100, 100, 100), (100, 25, 100), (25, 100, 25), (50, 100, 50), (100, 50, 100)],
-    'activation': ['relu', 'tanh'],
-    'solver': ['adam', 'lbfgs'],
-    'alpha': [0.0001, 0.001, 0.01],
-    'learning_rate': ['constant', 'adaptive'],
-    'max_iter': [x for x in range(1, 2000, 200)],
-    'random_state': [42]
-    }
-
-    # MLP results
-    mlp_best_result_score = -np.inf
-    mlp_best_scoreline_score = -np.inf
-    mlp_best_res_scores = []
-    mlp_best_scoreline_scores = []
-    mlp_best_result_params = None
-    mlp_best_scoreline_params = None
-
-    for params in ParameterGrid(param_grid_mlp):
-        try:
-            mlp = MLPRegressor(**params)
-            mlp.fit(X_train, y_train)
-
-            preds = mlp.predict(X_test)
-            combined = pd.DataFrame({
-                # "Date": X_test["date"],
-                # "Team": X_test["team"],
-                # "Opponent": X_test["opponent"],
-                "Predicted_GF_Home": preds[:, 0],  # Assuming "gf_home" is the first column in predictions
-                "Predicted_GF_Away": preds[:, 1],  # Assuming "gf_away" is the second column in predictions
-                "Actual_GF_Home": y_test["gf_home"],
-                "Actual_GF_Away": y_test["gf_away"]
-            })
-
-            combined["Predicted_GF_Home"] = combined["Predicted_GF_Home"].round(decimals = 0)
-            combined["Predicted_GF_Away"] = combined["Predicted_GF_Away"].round(decimals = 0)
-
-            total_games = combined.shape[0]
-            correct_scores = combined[(combined["Predicted_GF_Home"] == combined["Actual_GF_Home"]) & (combined["Predicted_GF_Away"] == combined["Actual_GF_Away"])].shape[0]/total_games
-            correct_home_wins = combined[(combined["Predicted_GF_Home"] > combined["Predicted_GF_Away"]) & (combined["Actual_GF_Home"] > combined["Actual_GF_Away"])].shape[0]/total_games
-            correct_away_wins = combined[(combined["Predicted_GF_Home"] < combined["Predicted_GF_Away"]) & (combined["Actual_GF_Home"] < combined["Actual_GF_Away"])].shape[0]/total_games
-            correct_draws = combined[(combined["Predicted_GF_Home"] == combined["Predicted_GF_Away"]) & (combined["Actual_GF_Home"] == combined["Actual_GF_Away"])].shape[0]/total_games
-            total_scores = correct_home_wins + correct_away_wins + correct_draws
-
-            if total_scores > mlp_best_result_score:
-                mlp_best_result_score = total_scores
-                mlp_best_result_params = params
-                mlp_best_res_scores = [correct_home_wins, correct_away_wins, correct_draws, correct_scores]
-            
-            if correct_scores > mlp_best_scoreline_score:
-                mlp_best_scoreline_score = correct_scores
-                mlp_best_scoreline_params = params
-                mlp_best_scoreline_scores = [correct_home_wins, correct_away_wins, correct_draws, correct_scores]
-        except:
-            pass   
-
-    print("---------------MLP---------------")
-    print("Best results params:", mlp_best_result_params)
-    print("Correct home wins:", mlp_best_res_scores[0], "Correct away wins:", mlp_best_res_scores[1], "Correct draws:", mlp_best_res_scores[2], "Correct scores:", mlp_best_res_scores[3])
-    print("\n")
-    print("Best score params:", mlp_best_scoreline_params)
-    print("Correct home wins:", mlp_best_scoreline_scores[0], "Correct away wins:", mlp_best_scoreline_scores[1], "Correct draws:", mlp_best_scoreline_scores[2], "Correct scores:", mlp_best_scoreline_scores[3])
-
 def test_xgb():
     # Load and process the data
     matches_df = pd.read_csv("data/matches.csv")
+    matches_df["date"] = pd.to_datetime(matches_df["date"])
+    matches_df = matches_df[matches_df["date"] < DATE]
     data = process(matches_df, True)
     predictors = get_predictors()
     data.dropna(inplace=True)
@@ -239,7 +172,7 @@ def test_xgb():
             xgb_regressor_best_score = total_scores
             xgb_regressor_best_params = params
 
-    print("---------------XGBoost Regressor---------------")
+    print("---------------XGB Regressor---------------")
     print("Best results params:", xgb_regressor_best_params)
     print("Correct scores:", xgb_regressor_best_score)
     print()
@@ -273,12 +206,12 @@ def test_xgb():
             xgb_classifier_best_score = total_scores
             xgb_classifier_best_params = params
 
-    print("---------------XGBoost Classifier---------------")
+    print("---------------XGB Classifier---------------")
     print("Best results params:", xgb_classifier_best_params)
     print("Correct scores:", xgb_classifier_best_score)
 
-
 if __name__ == "__main__":
-    # test_rf()
+    test_rf()
     # test_mlp()
     test_xgb()
+    # {'max_depth': None, 'max_features': 'log2', 'min_samples_leaf': 2, 'min_samples_split': 50, 'n_estimators': 1200, 'random_state': 42}
