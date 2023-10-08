@@ -1,0 +1,40 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    margin: 30px 0 0 50px;
+    align-items: flex-end;
+}
+
+.title {
+    flex-grow: 5;
+}
+
+.options {
+    flex-grow: 1;
+    display:flex;
+    align-items: flex-end;
+}
+
+.options img {
+    margin-left: 10px;
+}
+
+.table {
+    margin:auto;
+}
+
+.headerRow, .row {
+    display: flex;
+}
+
+.headerRow div, .row div {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+}
