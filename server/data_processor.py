@@ -77,7 +77,6 @@ def clean_data(matches_df):
     return pd.concat(dfs).sort_values(by=['team', 'date']).reset_index(drop=True)
 
 def get_overall_averages(final_matches, file=False):
-    cols = []
     with open("data/cols.txt", "r") as f:
         cols = f.read()
         cols = cols.split(",")

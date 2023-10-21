@@ -1,14 +1,14 @@
 import scraper
 import data_processor as DP
 
-from constants import DATE
+from constants import *
 
-from RandomForestRegressor import RFR
-from RandomForestClassifier import RFC
-from XGBRegressor import XGBR
-from XGBClassifier import XGBC
-from SVMClassifier import SVC
-from SVMRegressor import SVR
+from models.RandomForestRegressor import RFR
+from models.RandomForestClassifier import RFC
+from models.XGBRegressor import XGBR
+from models.XGBClassifier import XGBC
+# from models.SVMClassifier import SVC
+# from models.SVMRegressor import SVR
 
 import pandas as pd
 
@@ -20,7 +20,7 @@ def scrape():
 
 def process(df, file=False):
     r_df = DP.combine(DP.get_overall_averages(DP.clean_data(df), file))
-    r_df.to_csv("data/clean_data.csv")
+    r_df.to_csv(CLEAN_DATA)
     return r_df
 
 
@@ -41,22 +41,26 @@ def get_predictors():
 
     return predictors
 
-def combine_predictions():
-    pass
+def map_predicted_result(row):
+    if row['Predicted_Result'] == 0:
+        return row['Away_Team']
+    elif row['Predicted_Result'] == 1:
+        return 'Draw'
+    elif row['Predicted_Result'] == 2:
+        return row['Home_Team']
 
-def predict_c(model, type, train_set, next_games, predictors, result_df=None):
+def predict_c(model, type, train_set, next_games, predictors):
     print("------------------TRAINING " + type + "------------------")
     r_df = model.train(train_set, predictors)
     res = model.evaluate_model(r_df)
     print("Accuracy", res)
     print("------------------PREDICTING " + type + "------------------")
     r_df = model.predict(next_games, predictors)
-    r_df = r_df.rename(columns={'Predicted_Result': 'Predicted_Result_' + type})
-    if result_df is None:
-        return r_df
-    return pd.merge(result_df, r_df, on=['Date', 'Home_Team', 'Away_Team'])
+    r_df['Predicted_Winner'] = r_df.apply(map_predicted_result, axis=1)
+    r_df = r_df.drop('Predicted_Result', axis=1)
+    r_df.to_csv("data/predictions_" + type + ".csv", index=False)
 
-def predict_r(model, type, train_set, next_games, predictors, result_df=None):
+def predict_r(model, type, train_set, next_games, predictors):
     print("------------------TRAINING " + type + "------------------")
     r_df = model.train(train_set, predictors)
     c_s, c_r = model.evaluate_model(r_df)
@@ -64,16 +68,10 @@ def predict_r(model, type, train_set, next_games, predictors, result_df=None):
     print("Correct Results", c_r)
     print("------------------PREDICTING " + type + "------------------")
     r_df = model.predict(next_games, predictors)
-
-    r_df["predicted_score_" + type] = r_df['predicted_gf_home'].astype(str) + '-' + r_df['predicted_gf_away'].astype(str)
-    r_df = r_df.drop(['predicted_gf_home', 'predicted_gf_away'], axis=1)
-
-    if result_df is None:
-        return r_df
-    return pd.merge(result_df, r_df, on=['date', 'home_team', 'away_team'])
+    r_df.to_csv("data/predictions_" + type + ".csv", index=False)
 
 def train_and_predict():
-    matches_df = pd.read_csv("data/matches.csv")
+    matches_df = pd.read_csv(MATCH_FILE)
     # Convert date to date time
     matches_df["date"] = pd.to_datetime(matches_df["date"])
     # Drop future matches as their time is not certain and they are very far away
@@ -106,21 +104,11 @@ def train_and_predict():
     types_c = ["RFC", "XGBC"]
     types_r = ["RFR", "XGBR"]
 
-    c_df = None
-    r_df = None
     for model, type in zip(models_c, types_c):
-        if c_df is None:
-            c_df = predict_c(model, type, train_set, next_games, predictors)
-        else:
-            c_df = predict_c(model, type, train_set, next_games, predictors, c_df)
-    c_df.to_csv("data/predictions_c.csv", index=False)
+        predict_c(model, type, train_set, next_games, predictors)
 
     for model, type in zip(models_r, types_r):
-        if r_df is None:
-            r_df = predict_r(model, type, train_set, next_games, predictors)
-        else:
-            r_df = predict_r(model, type, train_set, next_games, predictors, r_df)
-    r_df.to_csv("data/predictions_r.csv", index=False)
+        predict_r(model, type, train_set, next_games, predictors)
 
 if __name__=='__main__':
     # scrape()

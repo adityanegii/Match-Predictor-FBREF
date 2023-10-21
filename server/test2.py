@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.model_selection import ParameterGrid, train_test_split
 import numpy as np
 
-from constants import TEST_DATE
+from constants import *
 from RandomForestClassifier import RFC
 from RandomForestRegressor import RFR
 from XGBClassifier import XGBC
@@ -26,7 +26,7 @@ def get_predictors():
     return predictors
 
 def setup():
-    data = pd.read_csv("data/clean_data.csv")
+    data = pd.read_csv(CLEAN_DATA)
     data["date"] = pd.to_datetime(data["date"])
     data = data[data["date"] < TEST_DATE]
 
@@ -146,5 +146,5 @@ if __name__ == '__main__':
     df.loc[4] = ["XGBRegressor (R)", xgbr_best_r_score, xgbr_best_r_params]
     df.loc[5] = ["XGBRegressor (S)", xgbr_best_s_score, xgbr_best_s_params]
 
-    df.to_csv("data/model_results.csv", index=False)
+    df.to_csv("model_results.csv", index=False)
 

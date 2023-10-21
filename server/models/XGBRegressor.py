@@ -1,12 +1,12 @@
-from sklearn.ensemble import RandomForestRegressor
+from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split
 
-class RFR():
+class XGBR():
     def __init__(self, params=None):
         if params:
-            self.model = RandomForestRegressor(**params)
+            self.model = XGBRegressor(**params)
         else:
-            self.model = RandomForestRegressor(n_estimators=2400, min_samples_split=150, min_samples_leaf=10, random_state=42)
+            self.model = XGBRegressor(n_estimators=2400, subsample=0.95, random_state=42)
         
     def train(self, data, predictors):
         X = data[predictors]
@@ -40,16 +40,16 @@ class RFR():
 
         # Create a new DataFrame with the desired columns
         result_df = data.copy()
-        result_df['date'] = data['date']
-        result_df['home_team'] = data['home_team']
-        result_df['away_team'] = data['away_team']
-        result_df['predicted_gf_home'] = preds[:, 0]  # Predicted goals for home team
-        result_df['predicted_gf_away'] = preds[:, 1]  # Predicted goals for away team
+        result_df['Date'] = data['date']
+        result_df['Home_Team'] = data['home_team']
+        result_df['Away_Team'] = data['away_team']
+        result_df['Predicted_GF_Home'] = preds[:, 0]  # Predicted goals for home team
+        result_df['Predicted_GF_Away'] = preds[:, 1]  # Predicted goals for away team
 
-        result_df['predicted_gf_away']= result_df['predicted_gf_away'].round(decimals=0)
-        result_df['predicted_gf_home']= result_df['predicted_gf_home'].round(decimals=0)
+        result_df['Predicted_GF_Home']= result_df['Predicted_GF_Home'].round(decimals=0)
+        result_df['Predicted_GF_Away']= result_df['Predicted_GF_Away'].round(decimals=0)
 
-        return result_df[['date', 'home_team', 'away_team', 'predicted_gf_home', 'predicted_gf_away']]
+        return result_df[['Date', 'Home_Team', 'Away_Team', 'Predicted_GF_Home', 'Predicted_GF_Away']]
 
     def evaluate_model(self, df):
         correct_scores = df[(df["Predicted_GF_Home"] == df["Actual_GF_Home"]) & (df["Predicted_GF_Away"] == df["Actual_GF_Away"])].shape[0]
@@ -58,10 +58,11 @@ class RFR():
         correct_draws = df[(df["Predicted_GF_Home"] == df["Predicted_GF_Away"]) & (df["Actual_GF_Home"] == df["Actual_GF_Away"])].shape[0]
         total_games = df.shape[0]
 
-        c_scores = correct_scores/total_games
+        c_s = correct_scores/total_games
         c_r = (correct_home_wins + correct_away_wins + correct_draws)/total_games
 
-        return c_scores, c_r
+        return c_s, c_r
+        
 
 
 

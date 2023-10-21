@@ -1,0 +1,18 @@
+.options img {
+    margin-left: 10px;
+}
+
+.options:hover {
+    cursor: pointer;
+    background-color: blue;
+}
+
+.dropDown-content {
+    display: flex;
+    flex-direction: column;
+    position:absolute
+}
+
+.dropDown-content > span {
+    padding: 3px;
+}

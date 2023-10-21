@@ -7,13 +7,14 @@ import numpy as np
 from xgboost import XGBRegressor
 from xgboost import XGBClassifier
 from sklearn import svm
+from constants import *
 
 
 from constants import DATE
 
 def process(df, file=False):
     r_df = DP.combine(DP.get_overall_averages(DP.clean_data(df), file))
-    r_df.to_csv("data/clean_data.csv")
+    r_df.to_csv(CLEAN_DATA)
     return r_df
 
 
@@ -35,7 +36,7 @@ def get_predictors():
     return predictors
 
 def test_rf():
-    matches_df = pd.read_csv("data/matches.csv")
+    matches_df = pd.read_csv(MATCH_FILE)
     matches_df["date"] = pd.to_datetime(matches_df["date"])
     matches_df = matches_df[matches_df["date"] < DATE]
     data = process(matches_df, True)
@@ -109,7 +110,7 @@ def test_rf():
     
 def test_xgb():
     # Load and process the data
-    matches_df = pd.read_csv("data/matches.csv")
+    matches_df = pd.read_csv(MATCH_FILE)
     matches_df["date"] = pd.to_datetime(matches_df["date"])
     matches_df = matches_df[matches_df["date"] < DATE]
     data = process(matches_df, True)

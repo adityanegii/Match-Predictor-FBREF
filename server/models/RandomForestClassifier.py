@@ -32,6 +32,7 @@ class RFC():
         y = data['result_code']
 
         preds = self.model.predict(X)
+        probs = self.model.predict_proba(X)  # Obtain the predicted probabilities
 
         # Create a new DataFrame with the desired columns
         result_df = data.copy()
@@ -40,8 +41,13 @@ class RFC():
         result_df['Away_Team'] = data['away_team']
         result_df['Predicted_Result'] = preds  # Predicted result of the game
 
-        return result_df[['Date', 'Home_Team', 'Away_Team', 'Predicted_Result']]
+        # Add predicted probabilities for each class to the DataFrame
+        result_df['Prob_Home_Win'] = (probs[:, 2] * 100).round(1)
+        result_df['Prob_Draw'] = (probs[:, 1] * 100).round(1)
+        result_df['Prob_Away_Win'] = (probs[:, 0] * 100).round(1)
 
+        return result_df[['Date', 'Home_Team', 'Away_Team', 'Predicted_Result', 'Prob_Home_Win', 'Prob_Draw', 'Prob_Away_Win']]
+    
     def evaluate_model(self, df):
         correct_results = df[df["Predicted_Result"] == df["Actual_Result"]].shape[0]
         total_games = df.shape[0]
