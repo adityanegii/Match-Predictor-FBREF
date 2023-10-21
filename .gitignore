@@ -1,4 +1,4 @@
 *.csv
-*.txt
+server/*.txt
 match-predictor-venv/
 __pycache__/

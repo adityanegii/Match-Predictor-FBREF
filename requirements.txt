@@ -1,0 +1,8 @@
+beautifulsoup4==4.12.2
+Flask==2.3.2
+flask_cors==4.0.0
+numpy==1.23.2
+pandas==1.4.3
+Requests==2.31.0
+scikit_learn==1.2.0
+xgboost==2.0.0
