@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../styles/Table.module.css'
 import { useState, useEffect } from 'react';
+import ProbabilityBar from './ProbabilityBar';
 
 const Table = ({ league, model }) => {
     const [data, setData] = useState(null);
@@ -50,7 +51,8 @@ const Table = ({ league, model }) => {
                   <tr key={index}>
                 <td>{item.Date}</td>
                 <td>{item.Home_Team}</td>
-                <td>Home: {item.Prob_Home_Win} --- Draw: {item.Prob_Draw} --- Away {item.Prob_Away_Win}</td>
+                {/* <td>Home: {item.Prob_Home_Win} --- Draw: {item.Prob_Draw} --- Away {item.Prob_Away_Win}</td> */}
+                <td><ProbabilityBar home={item.Prob_Home_Win} draw={item.Prob_Draw} away={item.Prob_Away_Win}/></td>
                 <td>{item.Away_Team}</td>
               </tr>
             ))}

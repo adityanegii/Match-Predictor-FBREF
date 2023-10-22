@@ -1,0 +1,50 @@
+.percentageBar {
+    display: flex;
+    height: 20px;
+    width: 400px;
+  }
+  
+  .bar1 {
+    background-color: #4CAF50;
+    align-items: center;
+    display: flex;
+  }
+  
+  .bar2 {
+    background-color: #2196F3;
+    align-items: center;
+    display: flex;
+  }
+  
+  .bar3 {
+    background-color: #f44336;
+    align-items: center;
+    display: flex;
+  }
+  
+  /* components/PercentageBar.module.css */
+  
+  .tooltip {
+    position: relative;
+    visibility: hidden;
+    width: 60px;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -30px;
+  }
+  
+  .bar1:hover .tooltip {
+    visibility: visible;
+  }
+  .bar2:hover .tooltip {
+    visibility: visible;
+  }
+  .bar3:hover .tooltip {
+    visibility: visible;
+  }
+  
