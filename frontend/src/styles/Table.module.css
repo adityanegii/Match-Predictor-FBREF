@@ -8,6 +8,7 @@
     width: 100%;
     overflow: auto;
     background-color: #1d1d1d;
+    border-radius: 10px;
   }
 
   .table-container table {

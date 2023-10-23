@@ -17,8 +17,8 @@ const models = [
 ]
 const DropDown = ({ data, onSelectLeague, onSelectModel }) => {
     const [isHovered, setIsHovered] = useState(false);
-    const [league, setLeague] = useState('League');
-    const [model, setModel] = useState('Model');
+    const [League, setLeague] = useState('League');
+    const [Model, setModel] = useState('Model');
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -44,7 +44,7 @@ const DropDown = ({ data, onSelectLeague, onSelectModel }) => {
             onMouseLeave={handleMouseLeave}
             >
                 <span className={styles.options}>
-                    <span>{league}</span>
+                    <span>{League}</span>
                     <img 
                     src={isHovered ? 'arrowUp.svg' : 'arrowDown.svg'}
                     alt="Image"
@@ -74,7 +74,7 @@ const DropDown = ({ data, onSelectLeague, onSelectModel }) => {
         onMouseLeave={handleMouseLeave}
         >
             <span className={styles.options}>
-                <span>{model}</span>
+                <span>{Model}</span>
                 <img 
                 src={isHovered ? 'arrowUp.svg' : 'arrowDown.svg'}
                 alt="Image"

@@ -4,25 +4,22 @@
     width: 400px;
   }
   
-  .bar1 {
-    background-color: #4CAF50;
+  .bar1, .bar2, .bar3 {
     align-items: center;
     display: flex;
+  }
+
+  .bar1 {
+    background-color: #4CAF50;
   }
   
   .bar2 {
     background-color: #2196F3;
-    align-items: center;
-    display: flex;
   }
   
   .bar3 {
     background-color: #f44336;
-    align-items: center;
-    display: flex;
   }
-  
-  /* components/PercentageBar.module.css */
   
   .tooltip {
     position: relative;
@@ -38,13 +35,20 @@
     margin-left: -30px;
   }
   
-  .bar1:hover .tooltip {
+  .bar1:hover .tooltip, .bar2:hover .tooltip, .bar3:hover .tooltip {
     visibility: visible;
   }
-  .bar2:hover .tooltip {
-    visibility: visible;
+
+  .bar1:hover, .bar2:hover, .bar3:hover {
+    cursor: pointer;
+  }  
+
+  .bar1:hover {
+    box-shadow: 0 0 10px 5px #4CAF50;
   }
-  .bar3:hover .tooltip {
-    visibility: visible;
+  .bar2:hover {
+    box-shadow: 0 0 10px 5px #2196F3;
   }
-  
+  .bar3:hover {
+    box-shadow: 0 0 10px 5px #f44336;
+  }

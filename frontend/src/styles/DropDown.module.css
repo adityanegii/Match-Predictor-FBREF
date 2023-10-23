@@ -16,3 +16,9 @@
 .dropDown-content > span {
     padding: 3px;
 }
+
+.dropDown-content > span:hover {
+    background-color: blue;
+    color: white;
+    cursor: pointer;
+}
