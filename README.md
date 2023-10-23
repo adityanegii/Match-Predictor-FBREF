@@ -41,11 +41,14 @@ Make sure to install the required libraries before running the Match Predictor.
 ## Running
 
 First, make sure you run the app.py from the server directory. Then run `npm run dev` from the 
-frontend directory. you might also have to run the main.py file from the server directory. 
-This will take time (10-20mins) as it scrape for data and train the models and make the
-predictions. This is still a feature I am working on to make faster and to have it done 
-through the browser. Right now only the Premier League is implemented so choosing another league 
-from the client will just cause a bad request.
+frontend directory. I have included the predictions for Matchweek 9 of the 2023-2024 English Premier
+League season if you are interested in seeing the functionality of this project quickly. 
+
+If you want to see the predictions for the set of upcoming fixtures, you will have 
+to run the main.py file from the server directory. This will take time (10-20mins) as 
+it scrape for data and train the models and make the predictions. This is still a feature 
+I am working on to make faster and to have it done  through the browser. Right now 
+only the Premier League is implemented so choosing another league from the client will just cause a bad request.
 
 To run a python file, first go into your terminal and go to the directory where the file you want to 
 run is (so `cd <ENTER ABSOLUTE PATH TO SERVER DIRECTORY>`) and then use `python <filename>` for Windows and 
