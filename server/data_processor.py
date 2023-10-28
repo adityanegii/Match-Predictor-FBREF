@@ -10,6 +10,7 @@ def get_data(file):
 def clean_data(matches_df):
     # Create map to standardize team names
     map_values = {
+        # Premier League
         "Brighton and Hove Albion": "Brighton",
         "Manchester United": "Manchester Utd", 
         "Newcastle United": "Newcastle Utd",
@@ -18,6 +19,23 @@ def clean_data(matches_df):
         "Nott'ham Forest": "Nottingham Forest",
         "Wolverhampton Wanderers": "Wolves",
         "Sheffield United": "Sheffield Utd",   
+        # Ligue 1
+        "Paris S-G" : "PSG",
+        "Paris Saint Germain" : "PSG",
+        # Bundesliga
+        "M'Gladbach": "Monchengladbach",
+        "Köln": "FC Koln",
+        "Koln": "FC Koln",
+        "Leverkusen": "Bayer Leverkusen",
+        "Eint Frankfurt": "Eintracht Frankfurt",
+        # Serie A
+        "Internazionale": "Inter",
+        # La Liga
+        "Almería": "Almeria",
+        "Atlético Madrid": "Atletico Madrid",
+        "Cádiz": "Cadiz",
+        "Betis": "Real Betis",
+        "Alavés": "Alaves",
     }
 
     mapping = MissingDict(**map_values)
@@ -76,7 +94,7 @@ def clean_data(matches_df):
 
     return pd.concat(dfs).sort_values(by=['team', 'date']).reset_index(drop=True)
 
-def get_overall_averages(final_matches, file=False):
+def get_overall_averages(final_matches):
     with open("data/cols.txt", "r") as f:
         cols = f.read()
         cols = cols.split(",")

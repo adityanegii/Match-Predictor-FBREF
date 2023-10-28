@@ -1,0 +1,11 @@
+Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
+2023-10-27,Genoa,Salernitana,94.1,5.7,0.2,Genoa
+2023-10-28,Sassuolo,Bologna,85.1,0.8,14.1,Sassuolo
+2023-10-28,Lecce,Torino,80.6,3.6,15.9,Lecce
+2023-10-28,Juventus,Hellas Verona,99.2,0.5,0.3,Juventus
+2023-10-29,Cagliari,Frosinone,44.8,51.5,3.7,Draw
+2023-10-29,Monza,Udinese,74.7,25.1,0.2,Monza
+2023-10-29,Inter,Roma,73.8,0.7,25.6,Inter
+2023-10-29,Napoli,Milan,83.3,0.1,16.5,Napoli
+2023-10-30,Empoli,Atalanta,71.1,0.7,28.3,Empoli
+2023-10-30,Lazio,Fiorentina,4.4,0.8,94.8,Fiorentina

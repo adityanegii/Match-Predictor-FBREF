@@ -1,6 +1,6 @@
-# *.csv
 match-predictor-venv/
 __pycache__/
 clean_data.csv
-matches.csv
+matches*.csv
 next_games.csv
+*.ipynb

@@ -2,11 +2,11 @@ import React, {useState} from 'react';
 import styles from '../styles/DropDown.module.css'
 
 const leagues = [
-    { name: "English Premier League", id: "E0" },
-    { name: "Ligue 1", id: "F1" },
-    { name: "Bundesliga", id: "D1" },
-    { name: "Serie A", id: "I1" },
-    { name: "La Liga", id: "SP1" },
+    { name: "English Premier League", id: "ENG1" },
+    { name: "Ligue 1", id: "FRA1" },
+    { name: "Bundesliga", id: "GER1" },
+    { name: "Serie A", id: "ITA1" },
+    { name: "La Liga", id: "SPA1" },
 ]
 
 const models = [

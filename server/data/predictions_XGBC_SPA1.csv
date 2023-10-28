@@ -1,0 +1,11 @@
+Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
+2023-10-27,Girona,Celta Vigo,51.3,37.2,11.5,Girona
+2023-10-28,Almeria,Las Palmas,75.1,16.7,8.2,Almeria
+2023-10-28,Barcelona,Real Madrid,81.1,3.5,15.3,Barcelona
+2023-10-28,Mallorca,Getafe,6.8,93.1,0.1,Draw
+2023-10-28,Cadiz,Sevilla,95.7,4.0,0.4,Cadiz
+2023-10-29,Real Betis,Osasuna,75.6,2.0,22.4,Real Betis
+2023-10-29,Rayo Vallecano,Real Sociedad,85.2,2.0,12.8,Rayo Vallecano
+2023-10-29,Athletic Club,Valencia,99.9,0.1,0.1,Athletic Club
+2023-10-29,Atletico Madrid,Alaves,90.9,8.8,0.3,Atletico Madrid
+2023-10-30,Granada,Villarreal,7.5,55.2,37.3,Draw
