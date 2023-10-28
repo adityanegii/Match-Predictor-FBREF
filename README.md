@@ -41,8 +41,8 @@ Make sure to install the required libraries before running the Match Predictor.
 ## Running
 
 First, make sure you run the app.py from the server directory. Then run `npm run dev` from the 
-frontend directory. I have included the predictions for Matchweek 9 of the 2023-2024 season if you are interested 
-in seeing the functionality of this project quickly. 
+frontend directory. I have included the predictions for Matchweek that took place starting on the 
+27th of October of the 2023-2024 season if you are interested in seeing the functionality of this project quickly. 
 
 If you want to see the predictions for the set of upcoming fixtures, you will have 
 to run the main.py file from the server directory. This will take time (~90 mins) as 
