@@ -1,11 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-10-27,Genoa,Salernitana,45.6,32.5,21.8,Genoa
-2023-10-28,Sassuolo,Bologna,46.8,25.2,28.0,Sassuolo
-2023-10-28,Lecce,Torino,42.6,29.9,27.5,Lecce
-2023-10-28,Juventus,Hellas Verona,54.4,28.0,17.6,Juventus
-2023-10-29,Cagliari,Frosinone,44.9,32.4,22.7,Cagliari
-2023-10-29,Monza,Udinese,51.0,28.7,20.2,Monza
-2023-10-29,Inter,Roma,53.3,20.0,26.7,Inter
-2023-10-29,Napoli,Milan,45.2,19.4,35.4,Napoli
-2023-10-30,Empoli,Atalanta,32.8,25.6,41.6,Atalanta
-2023-10-30,Lazio,Fiorentina,37.5,21.8,40.7,Fiorentina
+2023-12-01,Monza,Juventus,39.6,25.4,35.0,Monza
+2023-12-02,Genoa,Empoli,46.8,32.8,20.4,Genoa
+2023-12-02,Lazio,Cagliari,52.9,29.0,18.1,Lazio
+2023-12-02,Milan,Frosinone,50.3,25.4,24.3,Milan
+2023-12-03,Lecce,Bologna,37.0,29.5,33.4,Lecce
+2023-12-03,Fiorentina,Salernitana,57.0,27.6,15.4,Fiorentina
+2023-12-03,Udinese,Hellas Verona,48.4,32.3,19.3,Udinese
+2023-12-03,Sassuolo,Roma,40.2,25.7,34.0,Sassuolo
+2023-12-03,Napoli,Inter,39.2,20.1,40.7,Inter
+2023-12-04,Torino,Atalanta,29.9,24.2,46.0,Atalanta

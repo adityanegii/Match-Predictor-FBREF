@@ -1,10 +1,9 @@
 Date,Home_Team,Away_Team,Predicted_GF_Home,Predicted_GF_Away
-2023-10-27,Clermont Foot,Nice,1.0,1.0
-2023-10-28,Reims,Lorient,1.0,1.0
-2023-10-28,Lens,Nantes,2.0,1.0
-2023-10-29,Brest,PSG,1.0,2.0
-2023-10-29,Lille,Monaco,1.0,1.0
-2023-10-29,Metz,Le Havre,1.0,1.0
-2023-10-29,Montpellier,Toulouse,1.0,1.0
-2023-10-29,Rennes,Strasbourg,2.0,1.0
-2023-10-29,Marseille,Lyon,1.0,1.0
+2023-11-29,Montpellier,Clermont Foot,1.0,1.0
+2023-12-01,Reims,Strasbourg,1.0,1.0
+2023-12-02,Lens,Lyon,2.0,1.0
+2023-12-02,Nantes,Nice,1.0,1.0
+2023-12-03,Le Havre,PSG,1.0,2.0
+2023-12-03,Toulouse,Lorient,1.0,1.0
+2023-12-03,Lille,Metz,2.0,1.0
+2023-12-03,Marseille,Rennes,2.0,1.0

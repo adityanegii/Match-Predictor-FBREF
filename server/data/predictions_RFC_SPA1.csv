@@ -1,11 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-10-27,Girona,Celta Vigo,52.9,24.2,22.9,Girona
-2023-10-28,Almeria,Las Palmas,42.4,28.2,29.4,Almeria
-2023-10-28,Barcelona,Real Madrid,38.8,23.3,37.9,Barcelona
-2023-10-28,Mallorca,Getafe,53.5,27.7,18.8,Mallorca
-2023-10-28,Cadiz,Sevilla,35.1,31.0,34.0,Cadiz
-2023-10-29,Real Betis,Osasuna,55.6,23.8,20.7,Real Betis
-2023-10-29,Rayo Vallecano,Real Sociedad,34.9,29.5,35.6,Real Sociedad
-2023-10-29,Athletic Club,Valencia,59.4,23.5,17.1,Athletic Club
-2023-10-29,Atletico Madrid,Alaves,64.6,20.9,14.5,Atletico Madrid
-2023-10-30,Granada,Villarreal,30.4,29.3,40.3,Villarreal
+2023-11-29,Mallorca,Cadiz,56.5,27.7,15.7,Mallorca
+2023-12-01,Las Palmas,Getafe,57.8,26.5,15.7,Las Palmas
+2023-12-02,Girona,Valencia,62.0,23.1,14.9,Girona
+2023-12-02,Athletic Club,Rayo Vallecano,56.3,25.3,18.4,Athletic Club
+2023-12-02,Real Madrid,Granada,68.6,19.6,11.8,Real Madrid
+2023-12-02,Osasuna,Real Sociedad,35.1,29.3,35.6,Real Sociedad
+2023-12-03,Almeria,Real Betis,33.2,30.3,36.5,Real Betis
+2023-12-03,Sevilla,Villarreal,33.1,27.0,39.9,Villarreal
+2023-12-03,Barcelona,Atletico Madrid,44.4,21.3,34.3,Barcelona

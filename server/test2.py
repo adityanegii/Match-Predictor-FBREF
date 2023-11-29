@@ -3,50 +3,43 @@ from sklearn.model_selection import ParameterGrid, train_test_split
 import numpy as np
 
 from constants import *
-from RandomForestClassifier import RFC
-from RandomForestRegressor import RFR
-from XGBClassifier import XGBC
-from XGBRegressor import XGBR
+from models.RandomForestClassifier import RFC
+from  models.RandomForestRegressor import RFR
+from  models.XGBClassifier import XGBC
+from  models.XGBRegressor import XGBR
+import data_processor as DP
 
 def get_predictors():
     general = ["venue_code", "team_code", "day_code"]
     attacking = ["gf", "xg", "sh", "sot", "npxg", "npxg/sh"]
     passing = ["totpasscmp", "totpassatt", "totpasscmp%", "totpassdist", "prgpassdist", "xag", "xa", "keypasses"]
-    gk = ["sota", "saves", "save%", "psxg"]
+    # gk = ["sota", "saves", "save%", "psxg"]
     ca = ["sca", "gca", "scalivepass", "gcalivepass"]
     possesion = ["poss", "att3rdtouches", "attboxtouches", "atttakeons", "succtakeons", "carries", "totdistcarried", "prgdistcarried"]
     defense = ["tkl", "tklw", "tkldef3rd", "tklmid3rd", "tklatt3rd", "blocks", "int"]
     misc = ["fouls", "foulsdrawn", "recov", "aerialwon%"]
     
-    base = attacking + passing + gk + ca + possesion + defense + misc
+    base = attacking + passing + ca + possesion + defense + misc
     base_averages = [f"{x}_rolling" for x in base] + [f"{x}_mean" for x in base]
     base_home_away = [f"{x}_home" for x in base_averages] + [f"{x}_away" for x in base_averages]
     predictors = [f"{x}_home" for x in general] + [f"{x}_away" for x in general] + base_home_away
 
     return predictors
 
-def setup():
-    data = pd.read_csv(CLEAN_DATA)
+def setup(league):
+    data = pd.read_csv(f"data/process_{league}.csv")
     data["date"] = pd.to_datetime(data["date"])
     data = data[data["date"] < TEST_DATE]
 
     return data
-    predictors = get_predictors()
-
-    data.dropna(inplace=True)
-    X = data[predictors]
-    y = data[["gf_home", "gf_away"]]
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
-
-    return X_train, X_test, y_train, y_test
 
 def test_rf(data, predictors):
     param_grid_rf = {
-    'n_estimators': [x for x in range(400, 3000, 200)],
+    'n_estimators': [x for x in range(1600, 4000, 400)],
     'max_depth': [None, 5, 10],
-    'min_samples_split': [x for x in range (50, 500, 50)],
-    'min_samples_leaf': [x for x in range(2, 20, 2)],
-    'max_features': [1.0, 'sqrt', 'log2'],
+    'min_samples_split': [2, 5, 10, 25],
+    'min_samples_leaf': [1, 2, 5, 10],
+    'max_features': ['sqrt', 'log2'],
     'random_state': [42]
     }   
 
@@ -125,26 +118,29 @@ def test_xgb(data, predictors):
     return xgbc_best_params, xgbc_best_score, xgbr_best_r_params, xgbr_best_r_score, xgbr_best_s_params, xgbr_best_s_score
 
 if __name__ == '__main__':
-    data = setup()
-    
-    data = data.dropna()
-
+    leagues = ["ENG1", "FRA1", "GER1", "ITA1", "SPA1"]
     predictors = get_predictors()
-    rfc_best_params, rfc_best_score, rfr_best_r_params, rfr_best_r_score, rfr_best_s_params, rfr_best_s_score = test_rf(data, predictors)
-    print("RF Done")
-    print(rfc_best_params, rfc_best_score, rfr_best_r_params, rfr_best_r_score, rfr_best_s_params, rfr_best_s_score)\
-    
-    xgbc_best_params, xgbc_best_score, xgbr_best_r_params, xgbr_best_r_score, xgbr_best_s_params, xgbr_best_s_score = test_xgb(data, predictors)
-    print("XGB Done")
-    print(xgbc_best_params, xgbc_best_score, xgbr_best_r_params, xgbr_best_r_score, xgbr_best_s_params, xgbr_best_s_score)
+    for league in leagues:
+        print(league)
+        data = setup(league)
+        
+        data = data.dropna()
 
-    df = pd.DataFrame(columns=["Model", "Score", "Params"])
-    df.loc[0] = ["RandomForestClassifier", rfc_best_score, rfc_best_params]
-    df.loc[1] = ["RandomForestRegressor (R)", rfr_best_r_score, rfr_best_r_params]
-    df.loc[2] = ["RandomForestRegressor (S)", rfr_best_s_score, rfr_best_s_params]
-    df.loc[3] = ["XGBClassifier", xgbc_best_score, xgbc_best_params]
-    df.loc[4] = ["XGBRegressor (R)", xgbr_best_r_score, xgbr_best_r_params]
-    df.loc[5] = ["XGBRegressor (S)", xgbr_best_s_score, xgbr_best_s_params]
+        rfc_best_params, rfc_best_score, rfr_best_r_params, rfr_best_r_score, rfr_best_s_params, rfr_best_s_score = test_rf(data, predictors)
+        print("RF Done")
+        print(rfc_best_params, rfc_best_score, rfr_best_r_params, rfr_best_r_score, rfr_best_s_params, rfr_best_s_score)
+        
+        # xgbc_best_params, xgbc_best_score, xgbr_best_r_params, xgbr_best_r_score, xgbr_best_s_params, xgbr_best_s_score = test_xgb(data, predictors)
+        # print("XGB Done")
+        # print(xgbc_best_params, xgbc_best_score, xgbr_best_r_params, xgbr_best_r_score, xgbr_best_s_params, xgbr_best_s_score)
 
-    df.to_csv("model_results.csv", index=False)
+        df = pd.DataFrame(columns=["Model", "Score", "Params"])
+        df.loc[0] = ["RandomForestClassifier", rfc_best_score, rfc_best_params]
+        df.loc[1] = ["RandomForestRegressor (R)", rfr_best_r_score, rfr_best_r_params]
+        df.loc[2] = ["RandomForestRegressor (S)", rfr_best_s_score, rfr_best_s_params]
+        # df.loc[3] = ["XGBClassifier", xgbc_best_score, xgbc_best_params]
+        # df.loc[4] = ["XGBRegressor (R)", xgbr_best_r_score, xgbr_best_r_params]
+        # df.loc[5] = ["XGBRegressor (S)", xgbr_best_s_score, xgbr_best_s_params]
+
+        df.to_csv(f"results/model_results_{league}.csv", index=False)
 

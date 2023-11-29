@@ -1,11 +1,10 @@
 Date,Home_Team,Away_Team,Predicted_GF_Home,Predicted_GF_Away
-2023-10-27,Girona,Celta Vigo,2.0,2.0
-2023-10-28,Almeria,Las Palmas,2.0,2.0
-2023-10-28,Barcelona,Real Madrid,1.0,0.0
-2023-10-28,Mallorca,Getafe,3.0,1.0
-2023-10-28,Cadiz,Sevilla,1.0,1.0
-2023-10-29,Real Betis,Osasuna,2.0,1.0
-2023-10-29,Rayo Vallecano,Real Sociedad,1.0,2.0
-2023-10-29,Athletic Club,Valencia,2.0,0.0
-2023-10-29,Atletico Madrid,Alaves,2.0,1.0
-2023-10-30,Granada,Villarreal,1.0,1.0
+2023-11-29,Mallorca,Cadiz,2.0,1.0
+2023-12-01,Las Palmas,Getafe,1.0,1.0
+2023-12-02,Girona,Valencia,2.0,1.0
+2023-12-02,Athletic Club,Rayo Vallecano,2.0,1.0
+2023-12-02,Real Madrid,Granada,2.0,0.0
+2023-12-02,Osasuna,Real Sociedad,0.0,2.0
+2023-12-03,Almeria,Real Betis,2.0,2.0
+2023-12-03,Sevilla,Villarreal,1.0,1.0
+2023-12-03,Barcelona,Atletico Madrid,2.0,2.0

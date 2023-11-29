@@ -1,11 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-10-27,Crystal Palace,Tottenham,0.8,90.1,9.2,Draw
-2023-10-28,Chelsea,Brentford,7.8,6.9,85.4,Brentford
-2023-10-28,Arsenal,Sheffield Utd,93.5,1.9,4.6,Arsenal
-2023-10-28,Bournemouth,Burnley,88.7,4.2,7.0,Bournemouth
-2023-10-28,Wolves,Newcastle Utd,99.9,0.0,0.0,Wolves
-2023-10-29,West Ham,Everton,32.2,47.5,20.3,Draw
-2023-10-29,Aston Villa,Luton Town,94.2,3.4,2.4,Aston Villa
-2023-10-29,Brighton,Fulham,58.4,6.8,34.7,Brighton
-2023-10-29,Liverpool,Nottingham Forest,99.7,0.2,0.1,Liverpool
-2023-10-29,Manchester Utd,Manchester City,5.4,1.2,93.4,Manchester City
+2023-12-02,Arsenal,Wolves,99.5,0.5,0.0,Arsenal
+2023-12-02,Brentford,Luton Town,93.3,5.6,1.1,Brentford
+2023-12-02,Burnley,Sheffield Utd,9.4,6.2,84.4,Sheffield Utd
+2023-12-02,Nottingham Forest,Everton,26.9,47.3,25.8,Draw
+2023-12-02,Newcastle Utd,Manchester Utd,89.7,0.2,10.2,Newcastle Utd
+2023-12-03,Bournemouth,Aston Villa,0.0,0.2,99.8,Aston Villa
+2023-12-03,Chelsea,Brighton,0.7,35.5,63.7,Brighton
+2023-12-03,Liverpool,Fulham,99.0,0.5,0.5,Liverpool
+2023-12-03,West Ham,Crystal Palace,91.2,1.7,7.1,West Ham
+2023-12-03,Manchester City,Tottenham,99.2,0.6,0.2,Manchester City

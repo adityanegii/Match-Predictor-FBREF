@@ -90,7 +90,7 @@ def scrape(years, link):
 
             print(team_name + " " + str(year))
             matches = pd.read_html(data.text, match="Scores & Fixtures")[0]
-            matches = matches.drop(columns=["Poss", "xG", "Attendance", "Captain", "Match Report", "Referee", "Notes"])
+            matches = matches.drop(columns=["Poss", "xG", "Attendance", "Captain", "Referee", "Notes"])
                 
             # Get stats links
             soup = BeautifulSoup(data.text, features="html.parser")

@@ -4,3 +4,5 @@ clean_data.csv
 matches*.csv
 next_games.csv
 *.ipynb
+results/
+process*.csv

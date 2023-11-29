@@ -17,11 +17,29 @@ export default function Home() {
     setSelectedLeague(selectedItem);
   };
 
+  const trainAndPredict = () => {
+    const fetchData = async () => {
+      try {
+          const response = await fetch('http://127.0.0.1:8080/api/train-and-predict');
+          const responseData = await response.json();
+          console.log(responseData.message);
+      } catch (error) {
+          console.error('Error fetching data: ', error);
+      }
+  };
+  fetchData();
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>
         <div className={styles.title}>
           <h1>Match-Predictor</h1>
+        </div>
+        <div className={styles["options-container"]}>
+          <button data={1} onClick={trainAndPredict}>
+            Train and Predict
+          </button>
         </div>
         <div className={styles["options-container"]}>
           <DropDown data={1} onSelectModel={handleModelSelect} />

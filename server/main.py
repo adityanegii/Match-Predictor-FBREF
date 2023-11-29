@@ -16,8 +16,9 @@ def scrape():
     url = "https://fbref.com/en/comps/Big5/Big-5-European-Leagues-Stats"
     scraper.scrape(years, url)
 
-def process(df, file=False):
+def process(df, league):
     r_df = DP.combine(DP.get_overall_averages(DP.clean_data(df)))
+    r_df.to_csv("data/process_" + league + ".csv", index=False)
     return r_df
 
 
@@ -81,7 +82,7 @@ def train_and_predict():
         # Replace NaN values with 0 for all rows after DATE
         matches_df.loc[matches_df['date'].dt.date > pd.Timestamp(DATE).date(), :] = matches_df.loc[matches_df['date'].dt.date > pd.Timestamp(DATE).date(), :].fillna(0)
 
-        data = process(matches_df, True)
+        data = process(matches_df, league)
 
         # train and predict
         train_set = data[data['date'].dt.date < pd.Timestamp(DATE).date()].dropna()
@@ -108,5 +109,5 @@ def train_and_predict():
             predict_r(model, type, train_set, next_games, predictors, league)
 
 if __name__=='__main__':
-    # scrape()
-    train_and_predict()
+    scrape()
+    # train_and_predict()

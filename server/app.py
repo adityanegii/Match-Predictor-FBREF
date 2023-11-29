@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 import csv
+from main import train_and_predict
 
 app = Flask(__name__)
 CORS(app)
@@ -144,6 +145,13 @@ def get_pd_xgbr():
         csv_data = list(csv.DictReader(f))
 
     return jsonify(csv_data)
+
+@app.route("/api/train-and-predict")
+def predict():
+    train_and_predict()
+    return jsonify({"message": "OK"})
+
+    
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
