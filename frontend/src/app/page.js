@@ -37,9 +37,9 @@ export default function Home() {
           <h1>Match-Predictor</h1>
         </div>
         <div className={styles["options-container"]}>
-          <button data={1} onClick={trainAndPredict}>
+          <span data={1} onClick={trainAndPredict} className={styles['train-button']}>
             Train and Predict
-          </button>
+          </span>
         </div>
         <div className={styles["options-container"]}>
           <DropDown data={1} onSelectModel={handleModelSelect} />
