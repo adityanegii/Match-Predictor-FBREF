@@ -44,10 +44,9 @@ First, make sure you run the app.py from the server directory. Then run `npm run
 frontend directory. I have included the predictions for Matchweek that took place starting on the 
 1st of December of the 2023-2024 season if you are interested in seeing the functionality of this project quickly. 
 
-If you want to see the predictions for the set of upcoming fixtures, you will have 
-to run the main.py file from the server directory. This will take time (~90 mins) as 
-it scrape for data and train the models and make the predictions. This is still a feature 
-I am working on to make faster and to have it done through the browser.
+If you want to see the predictions for the set of upcoming fixtures, press the train and predict button on your browser.
+This will take time (~90 mins) as it scrapes for data, trains the models, and make the predictions. This is still a feature 
+I am working on to make faster
 
 To run a python file, first go into your terminal and go to the directory where the file you want to 
 run is (so `cd <ENTER ABSOLUTE PATH TO SERVER DIRECTORY>`) and then use `python <filename>` for Windows and 
