@@ -108,6 +108,9 @@ def train_and_predict():
         for model, type in zip(models_r, types_r):
             predict_r(model, type, train_set, next_games, predictors, league)
 
-if __name__=='__main__':
+def main():
     scrape()
-    # train_and_predict()
+    train_and_predict()
+# if __name__=='__main__':
+#     scrape()
+#     # train_and_predict()
