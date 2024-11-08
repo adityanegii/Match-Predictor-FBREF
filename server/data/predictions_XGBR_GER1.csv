@@ -1,10 +1,8 @@
 Date,Home_Team,Away_Team,Predicted_GF_Home,Predicted_GF_Away
-2023-12-01,Darmstadt 98,FC Koln,1.0,1.0
-2023-12-02,Bayern Munich,Union Berlin,3.0,1.0
-2023-12-02,Bochum,Wolfsburg,2.0,1.0
-2023-12-02,Monchengladbach,Hoffenheim,2.0,1.0
-2023-12-02,RB Leipzig,Heidenheim,3.0,1.0
-2023-12-02,Stuttgart,Werder Bremen,3.0,1.0
-2023-12-03,Mainz 05,Freiburg,1.0,1.0
-2023-12-03,Bayer Leverkusen,Dortmund,2.0,2.0
-2023-12-03,Augsburg,Eintracht Frankfurt,1.0,1.0
+2024-10-04,Augsburg,Monchengladbach,2.0,2.0
+2024-10-05,Bochum,Wolfsburg,1.0,2.0
+2024-10-05,Union Berlin,Dortmund,1.0,3.0
+2024-10-05,Werder Bremen,Freiburg,1.0,2.0
+2024-10-06,Heidenheim,RB Leipzig,2.0,3.0
+2024-10-06,Eintracht Frankfurt,Bayern Munich,2.0,3.0
+2024-10-06,Stuttgart,Hoffenheim,3.0,1.0

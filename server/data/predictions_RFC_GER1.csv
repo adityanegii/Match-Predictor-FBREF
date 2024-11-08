@@ -1,10 +1,8 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-12-01,Darmstadt 98,FC Koln,44.9,26.6,28.5,Darmstadt 98
-2023-12-02,Bayern Munich,Union Berlin,72.9,15.1,12.0,Bayern Munich
-2023-12-02,Bochum,Wolfsburg,45.2,25.6,29.2,Bochum
-2023-12-02,Monchengladbach,Hoffenheim,54.8,20.7,24.5,Monchengladbach
-2023-12-02,RB Leipzig,Heidenheim,71.4,15.6,13.0,RB Leipzig
-2023-12-02,Stuttgart,Werder Bremen,62.3,18.7,19.0,Stuttgart
-2023-12-03,Mainz 05,Freiburg,42.6,25.9,31.5,Mainz 05
-2023-12-03,Bayer Leverkusen,Dortmund,43.6,24.2,32.2,Bayer Leverkusen
-2023-12-03,Augsburg,Eintracht Frankfurt,41.8,27.5,30.7,Augsburg
+2024-10-04,Augsburg,Monchengladbach,42.9,27.0,30.1,Augsburg
+2024-10-05,Bochum,Wolfsburg,41.4,26.8,31.8,Bochum
+2024-10-05,Union Berlin,Dortmund,28.1,21.1,50.9,Dortmund
+2024-10-05,Werder Bremen,Freiburg,42.2,26.4,31.4,Werder Bremen
+2024-10-06,Heidenheim,RB Leipzig,30.5,23.0,46.5,RB Leipzig
+2024-10-06,Eintracht Frankfurt,Bayern Munich,23.8,20.0,56.2,Bayern Munich
+2024-10-06,Stuttgart,Hoffenheim,55.1,20.5,24.4,Stuttgart

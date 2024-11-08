@@ -40,21 +40,22 @@ HEADERS = [
         {"User-Agent": "Mozilla/5.0 (Linux; Android 12; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Mobile Safari/537.36"}
     ]
 
-def parse_url(url, parse, text):
-    while True:
+def get_request(url):
+    data = requests.get(url, headers=random.choice(HEADERS))
+    time.sleep(6)
+    while data.status_code != 200:
+        print(data.status_code, url)
+        time.sleep(600)
         data = requests.get(url, headers=random.choice(HEADERS))
-        if (data.status_code == 200):
-            try:
-                df = pd.read_html(data.text, match=text)[0]
-                df = parse(df)
-                return df
-            except:
-                time.sleep(10)
-        else:
-            print(f"Error: {data.status_code}")
-            time.sleep(10)
+    return data
 
-def scrape(years, link):
+def parse_url(url: str, parse, text: str):
+    data = get_request(url)
+    df = pd.read_html(data.text, match=text)[0]
+    df = parse(df)
+    return df
+
+def scrape(years: list, link: str):
     # parse_fcns = [parse_def, parse_gca, parse_gk, parse_misc, parse_pass, parse_passTypes, parse_poss, parse_shooting]
     parse_fcns = [parse_def, parse_gca, parse_misc, parse_pass, parse_poss, parse_shooting]
     # table_names = ["Defensive Actions", "Goal and Shot Creation", "Goalkeeping", "Miscellaneous Stats", "Passing", "Pass Types", "Possession", "Shooting"]
@@ -65,28 +66,27 @@ def scrape(years, link):
     teams = {}
 
     for year in years:
-        data = requests.get(standings_url)
+        data = get_request(standings_url)
+
         soup = BeautifulSoup(data.text, features="html.parser")
         standings_table = soup.select('table.stats_table')[0]
 
         links = [l.get("href") for l in standings_table.find_all('a') if '/squads/' in l.get("href")]
 
-        if year == years[0]:
-            teams = {x.split("/")[-1] for x in links}
-            print(teams)
+        teams = {x.split("/")[-1] for x in links}
 
         team_urls = [f"https://fbref.com{l}" for l in links if l.split("/")[-1] in teams]
 
         previous_season = soup.select("a.prev")[0].get("href")
         standings_url = f"https://fbref.com{previous_season}"
         
+        
         # Get team data
 
         for team_url in team_urls:
             # Get match data
             team_name = team_url.split("/")[-1].replace("-Stats", "").replace("-", " ")
-            data = requests.get(team_url)
-            time.sleep(3)
+            data = get_request(team_url)
 
             print(team_name + " " + str(year))
             matches = pd.read_html(data.text, match="Scores & Fixtures")[0]
@@ -105,7 +105,6 @@ def scrape(years, link):
             dfs = []
             for url, category, parser in zip(links, table_names, parse_fcns):
                 dfs.append(parse_url(url, parser, category))
-                time.sleep(random.randint(1, 3))
             
             team_data = matches
             for df in dfs:
@@ -125,11 +124,13 @@ def scrape(years, link):
             team_data["Season"] = year
             team_data["Team"] = team_name
             all_matches.append(team_data)
-
+            
+    
     matches_df = pd.concat(all_matches)
     matches_df.columns = [c.lower() for c in matches_df.columns]
 
     matches_df["date"] = pd.to_datetime(matches_df["date"])
+
     matches_df[matches_df["comp"] == "Premier League"].to_csv("data/matches_ENG1.csv", index = False)
     matches_df[matches_df["comp"] == "Bundesliga"].to_csv("data/matches_GER1.csv", index = False)
     matches_df[matches_df["comp"] == "La Liga"].to_csv("data/matches_SPA1.csv", index = False)

@@ -1,11 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-12-02,Arsenal,Wolves,64.7,17.1,18.2,Arsenal
-2023-12-02,Brentford,Luton Town,52.0,22.6,25.3,Brentford
-2023-12-02,Burnley,Sheffield Utd,42.0,25.3,32.7,Burnley
-2023-12-02,Nottingham Forest,Everton,39.1,26.6,34.3,Nottingham Forest
-2023-12-02,Newcastle Utd,Manchester Utd,51.8,18.6,29.6,Newcastle Utd
-2023-12-03,Bournemouth,Aston Villa,36.5,24.6,38.9,Aston Villa
-2023-12-03,Chelsea,Brighton,47.5,19.9,32.6,Chelsea
-2023-12-03,Liverpool,Fulham,69.5,15.5,15.0,Liverpool
-2023-12-03,West Ham,Crystal Palace,54.6,20.9,24.5,West Ham
-2023-12-03,Manchester City,Tottenham,55.5,17.9,26.6,Manchester City
+2024-10-05,Crystal Palace,Liverpool,24.6,22.1,53.4,Liverpool
+2024-10-05,Arsenal,Southampton,72.5,15.6,11.9,Arsenal
+2024-10-05,Brentford,Wolves,56.5,23.7,19.7,Brentford
+2024-10-05,Leicester City,Bournemouth,35.0,27.0,38.1,Bournemouth
+2024-10-05,Manchester City,Fulham,66.7,17.2,16.1,Manchester City
+2024-10-05,Everton,Newcastle Utd,30.1,26.3,43.6,Newcastle Utd
+2024-10-06,Aston Villa,Manchester Utd,46.3,22.1,31.6,Aston Villa
+2024-10-06,Chelsea,Nottingham Forest,68.3,17.1,14.6,Chelsea
+2024-10-06,Brighton,Tottenham,46.0,20.8,33.2,Brighton

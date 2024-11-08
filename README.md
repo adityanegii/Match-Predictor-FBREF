@@ -41,16 +41,17 @@ Make sure to install the required libraries before running the Match Predictor.
 ## Running
 
 First, make sure you run the app.py from the server directory. Then run `npm run dev` from the 
-frontend directory. I have included the predictions for Matchweek that took place starting on the 
-1st of December of the 2023-2024 season if you are interested in seeing the functionality of this project quickly. 
+frontend directory. I have included the predictions for a recent Matchweek (check the predicitions*.csv to see exactly which matchweek it is) if you are interested in seeing the functionality of this project quickly. 
 
 If you want to see the predictions for the set of upcoming fixtures, press the train and predict button on your browser.
-This will take time (~90 mins) as it scrapes for data, trains the models, and make the predictions. This is still a feature 
+This will take time as it scrapes for data, trains the models, and make the predictions. This is still a feature 
 I am working on to make faster
 
 To run a python file, first go into your terminal and go to the directory where the file you want to 
 run is (so `cd <ENTER ABSOLUTE PATH TO SERVER DIRECTORY>`) and then use `python <filename>` for Windows and 
 `python3 <filename>` for macOS and Linux.
+
+When on the browser, you can press the scrape button to scrape the data from FBREF. This will take a while. Conversly you can press the train and predict button to train the models and make predictions from existing data (this option will not be available since there is no data to start with). You can also check the predictions for different models by selecting from the drop down menus (this is available since I have included recent prediction files).
 
 ## Acknowledgements
 

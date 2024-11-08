@@ -22,25 +22,28 @@ def clean_data(matches_df):
         # Ligue 1
         "Paris S-G" : "PSG",
         "Paris Saint Germain" : "PSG",
+        "Saint Etienne": "Saint-Étienne",
         # Bundesliga
-        "M'Gladbach": "Monchengladbach",
+        "Gladbach": "Monchengladbach",
         "Köln": "FC Koln",
         "Koln": "FC Koln",
         "Leverkusen": "Bayer Leverkusen",
         "Eint Frankfurt": "Eintracht Frankfurt",
+        "St. Pauli": "St Pauli",
         # Serie A
         "Internazionale": "Inter",
         # La Liga
-        "Almería": "Almeria",
-        "Atlético Madrid": "Atletico Madrid",
-        "Cádiz": "Cadiz",
+        "Almeria": "Almería",
+        "Atletico Madrid": "Atlético Madrid",
+        "Cadiz": "Cádiz",
         "Betis": "Real Betis",
-        "Alavés": "Alaves",
+        "Alaves": "Alavés",
+        "Leganes": "Leganés"
     }
 
     mapping = MissingDict(**map_values)
 
-    # Replace team names with standardized names
+    # # Replace team names with standardized names
     matches_df['team'] = matches_df['team'].replace(mapping)
     matches_df['opponent'] = matches_df['opponent'].replace(mapping)
 
@@ -115,9 +118,37 @@ def combine(df):
     home_table_renamed = home_table.rename(columns={"team": "home_team", "opponent": "away_team", "gf": "gf_home", "ga": "gf_away"})
     away_table_renamed = away_table.rename(columns={"team": "away_team", "opponent": "home_team", "gf": "gf_away", "ga": "gf_home"})
 
-    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "round", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
+    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "comp", "round", "day", "season", "round", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
     merged_df['result_code'] = (
         merged_df['gf_home'] > merged_df['gf_away']).astype(int) - (
         merged_df['gf_home'] < merged_df['gf_away']).astype(int) + 1 # 2 for home team win, 1 for draw, 0 for away team win
 
     return merged_df
+
+def mark_promoted(df):
+    # df["date"] = pd.to_datetime(df["date"]) # can remove this later
+
+    # df["year"] = df["date"].dt.year
+
+    # df["season"] = pd.to_datetime(df["season"])
+    teams_per_year = df.groupby("season")["home_team"].unique()
+    first_year = df["season"].min()
+
+    filtered_df = df[df["season"] != first_year]
+    
+    filtered_df["promoted_home"] = 0
+    filtered_df["promoted_away"] = 0
+
+    for year, teams in teams_per_year.items():
+        if year == first_year:
+            continue
+        prev_year = year - 1
+        prev_teams = teams_per_year[prev_year]
+        promoted_teams = [x for x in teams if x not in prev_teams]
+
+
+        for team in promoted_teams:
+            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["home_team"] == team), "promoted_home"] = 1
+            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["away_team"] == team), "promoted_away"] = 1
+
+    return filtered_df

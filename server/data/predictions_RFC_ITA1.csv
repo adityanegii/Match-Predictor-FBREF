@@ -1,11 +1,9 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-12-01,Monza,Juventus,39.6,25.4,35.0,Monza
-2023-12-02,Genoa,Empoli,46.8,32.8,20.4,Genoa
-2023-12-02,Lazio,Cagliari,52.9,29.0,18.1,Lazio
-2023-12-02,Milan,Frosinone,50.3,25.4,24.3,Milan
-2023-12-03,Lecce,Bologna,37.0,29.5,33.4,Lecce
-2023-12-03,Fiorentina,Salernitana,57.0,27.6,15.4,Fiorentina
-2023-12-03,Udinese,Hellas Verona,48.4,32.3,19.3,Udinese
-2023-12-03,Sassuolo,Roma,40.2,25.7,34.0,Sassuolo
-2023-12-03,Napoli,Inter,39.2,20.1,40.7,Inter
-2023-12-04,Torino,Atalanta,29.9,24.2,46.0,Atalanta
+2024-10-04,Hellas Verona,Venezia,43.6,33.8,22.5,Hellas Verona
+2024-10-05,Udinese,Lecce,35.4,38.2,26.4,Draw
+2024-10-05,Atalanta,Genoa,61.6,22.7,15.7,Atalanta
+2024-10-05,Inter,Torino,59.1,22.0,18.9,Inter
+2024-10-06,Juventus,Cagliari,48.5,26.8,24.7,Juventus
+2024-10-06,Lazio,Empoli,56.0,26.4,17.6,Lazio
+2024-10-06,Monza,Roma,24.7,31.4,43.9,Roma
+2024-10-06,Fiorentina,Milan,39.9,25.8,34.2,Fiorentina

@@ -30,7 +30,6 @@ class RFC():
     def predict(self, data, predictors):
         X = data[predictors]
         y = data['result_code']
-
         preds = self.model.predict(X)
         probs = self.model.predict_proba(X)  # Obtain the predicted probabilities
 

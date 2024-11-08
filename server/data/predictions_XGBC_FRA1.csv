@@ -1,9 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2023-11-29,Montpellier,Clermont Foot,67.8,12.1,20.1,Montpellier
-2023-12-01,Reims,Strasbourg,16.3,8.2,75.5,Strasbourg
-2023-12-02,Lens,Lyon,72.6,25.1,2.2,Lens
-2023-12-02,Nantes,Nice,0.5,88.6,10.8,Draw
-2023-12-03,Le Havre,PSG,13.3,40.9,45.8,PSG
-2023-12-03,Toulouse,Lorient,29.7,68.5,1.8,Draw
-2023-12-03,Lille,Metz,51.4,47.9,0.6,Lille
-2023-12-03,Marseille,Rennes,99.7,0.3,0.0,Marseille
+2024-10-04,Marseille,Angers,68.8,30.5,0.7,Marseille
+2024-10-05,Saint-Étienne,Auxerre,90.1,9.8,0.0,Saint-Étienne
+2024-10-05,Lille,Toulouse,62.2,31.4,6.4,Lille
+2024-10-05,Rennes,Monaco,1.6,86.6,11.8,Draw
+2024-10-06,Lyon,Nantes,17.7,80.1,2.1,Draw
+2024-10-06,Brest,Le Havre,95.5,4.4,0.1,Brest
+2024-10-06,Reims,Montpellier,47.8,37.0,15.3,Reims
+2024-10-06,Strasbourg,Lens,7.0,11.1,81.8,Lens
+2024-10-06,Nice,PSG,4.7,43.8,51.5,PSG

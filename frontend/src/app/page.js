@@ -30,11 +30,29 @@ export default function Home() {
   fetchData();
   }
 
+  const scrape = () => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8080/api/scrape');
+        const responseData = await response.json();
+        console.log(responseData.message);
+      } catch (error) {
+        console.error('Error scraping data: ', error);
+      }
+    };
+    fetchData();
+  }
+
   return (
     <div className={styles.main}>
       <div className={styles.header}>
         <div className={styles.title}>
           <h1>Match-Predictor</h1>
+        </div>
+        <div className={styles["options-container"]}>
+          <span data={1} onClick={scrape} className={styles['train-button']}>
+            Scrape
+          </span>
         </div>
         <div className={styles["options-container"]}>
           <span data={1} onClick={trainAndPredict} className={styles['train-button']}>

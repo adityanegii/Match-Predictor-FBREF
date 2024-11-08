@@ -1,7 +1,8 @@
+import time
 from flask import Flask, jsonify
 from flask_cors import CORS
 import csv
-from main import main
+from main import scrape, train_and_predict
 
 app = Flask(__name__)
 CORS(app)
@@ -148,10 +149,28 @@ def get_pd_xgbr():
 
 @app.route("/api/train-and-predict")
 def predict():
-    main()
-    return jsonify({"message": "OK"})
+    try:
+        train_and_predict()
+        return jsonify({"message": "OK"})
+    except Exception as e:
+        return jsonify({"message": f"Error {e}"})
 
-    
+@app.route("/api/scrape")
+def scrape_data():
+    try:
+        scrape()
+        return jsonify({"message": "OK"})
+    except Exception as e:
+        return jsonify({"message": f"Error {e}"})
+
+
+@app.route("/api/test")
+def test():
+    try:
+        time.sleep(5)
+        return jsonify({"message": "OK"})
+    except Exception as e:
+        return jsonify({"message": f"Error {e}"})
 
 if __name__ == "__main__":
     app.run(debug=True, port=8080)
