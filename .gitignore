@@ -6,3 +6,4 @@ next_games.csv
 *.ipynb
 results/
 process*.csv
+*.csv
