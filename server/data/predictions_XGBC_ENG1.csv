@@ -1,10 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2024-10-05,Crystal Palace,Liverpool,7.3,53.3,39.4,Draw
-2024-10-05,Arsenal,Southampton,97.0,2.9,0.0,Arsenal
-2024-10-05,Brentford,Wolves,89.7,9.1,1.2,Brentford
-2024-10-05,Leicester City,Bournemouth,3.5,0.2,96.3,Bournemouth
-2024-10-05,Manchester City,Fulham,98.7,1.2,0.1,Manchester City
-2024-10-05,Everton,Newcastle Utd,2.4,78.2,19.4,Draw
-2024-10-06,Aston Villa,Manchester Utd,85.0,6.6,8.3,Aston Villa
-2024-10-06,Chelsea,Nottingham Forest,87.7,10.9,1.4,Chelsea
-2024-10-06,Brighton,Tottenham,80.6,16.5,2.9,Brighton
+2024-11-09,Brentford,Bournemouth,94.9,3.3,1.8,Brentford
+2024-11-09,Crystal Palace,Fulham,14.5,20.7,64.8,Fulham
+2024-11-09,West Ham,Everton,99.7,0.2,0.1,West Ham
+2024-11-09,Wolves,Southampton,95.9,0.5,3.6,Wolves
+2024-11-09,Brighton,Manchester City,4.8,45.4,49.8,Manchester City
+2024-11-09,Liverpool,Aston Villa,93.8,2.8,3.4,Liverpool
+2024-11-10,Manchester Utd,Leicester City,95.4,4.2,0.4,Manchester Utd
+2024-11-10,Nottingham Forest,Newcastle Utd,10.1,0.1,89.7,Newcastle Utd
+2024-11-10,Tottenham,Ipswich Town,99.8,0.0,0.2,Tottenham
+2024-11-10,Chelsea,Arsenal,7.1,20.1,72.8,Arsenal

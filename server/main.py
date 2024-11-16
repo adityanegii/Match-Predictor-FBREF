@@ -95,8 +95,9 @@ def train_and_predict():
             train_set = train_set.dropna()
         next_games = data[data['date'].dt.date >= pd.Timestamp(DATE).date()]
         # print all next games home-away as a tuple list
-        # print(list(zip(next_games['Home_Team'], next_games['Away_Team'])))        
-        next_games = next_games.dropna()
+        # next_games.to_csv("data/next_games_before" + league + ".csv", index=False)     
+        # next_games = next_games.dropna()
+        # next_games.to_csv("data/next_games_after" + league + ".csv", index=False)     
         
         rfc = RFC()
         rfr = RFR()

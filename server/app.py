@@ -168,7 +168,7 @@ def scrape_data():
 def test():
     try:
         time.sleep(5)
-        return jsonify({"message": "OK"})
+        return jsonify({"message": "Test OK"})
     except Exception as e:
         return jsonify({"message": f"Error {e}"})
 

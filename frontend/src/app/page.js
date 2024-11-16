@@ -8,6 +8,8 @@ export default function Home() {
 
   const [selectedModel, setSelectedModel] = useState(null);
   const [selectedLeague, setSelectedLeague] = useState(null);
+  const [isScraping, setIsScraping] = useState(false);
+  const [isTraining, setIsTraining] = useState(false);
 
   const handleModelSelect = (selectedItem) => {
     setSelectedModel(selectedItem);
@@ -20,24 +22,32 @@ export default function Home() {
   const trainAndPredict = () => {
     const fetchData = async () => {
       try {
+        setIsTraining(true);
           const response = await fetch('http://127.0.0.1:8080/api/train-and-predict');
+          // const response = await fetch('http://127.0.0.1:8080/api/test');
           const responseData = await response.json();
           console.log(responseData.message);
       } catch (error) {
           console.error('Error fetching data: ', error);
+      } finally {
+          setIsTraining(false);
       }
-  };
-  fetchData();
+    };
+    fetchData();
   }
 
   const scrape = () => {
     const fetchData = async () => {
       try {
+        setIsScraping(true);
         const response = await fetch('http://127.0.0.1:8080/api/scrape');
+        // const response = await fetch('http://127.0.0.1:8080/api/test');
         const responseData = await response.json();
         console.log(responseData.message);
       } catch (error) {
         console.error('Error scraping data: ', error);
+      } finally {
+        setIsScraping(false);
       }
     };
     fetchData();
@@ -51,12 +61,12 @@ export default function Home() {
         </div>
         <div className={styles["options-container"]}>
           <span data={1} onClick={scrape} className={styles['train-button']}>
-            Scrape
+            {isScraping ? 'Scraping...' : 'Scrape'}
           </span>
         </div>
         <div className={styles["options-container"]}>
           <span data={1} onClick={trainAndPredict} className={styles['train-button']}>
-            Train and Predict
+            {isTraining ? 'Training...' : 'Train and Predict'}
           </span>
         </div>
         <div className={styles["options-container"]}>
