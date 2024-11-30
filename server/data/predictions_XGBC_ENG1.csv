@@ -1,11 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2024-11-09,Brentford,Bournemouth,94.9,3.3,1.8,Brentford
-2024-11-09,Crystal Palace,Fulham,14.5,20.7,64.8,Fulham
-2024-11-09,West Ham,Everton,99.7,0.2,0.1,West Ham
-2024-11-09,Wolves,Southampton,95.9,0.5,3.6,Wolves
-2024-11-09,Brighton,Manchester City,4.8,45.4,49.8,Manchester City
-2024-11-09,Liverpool,Aston Villa,93.8,2.8,3.4,Liverpool
-2024-11-10,Manchester Utd,Leicester City,95.4,4.2,0.4,Manchester Utd
-2024-11-10,Nottingham Forest,Newcastle Utd,10.1,0.1,89.7,Newcastle Utd
-2024-11-10,Tottenham,Ipswich Town,99.8,0.0,0.2,Tottenham
-2024-11-10,Chelsea,Arsenal,7.1,20.1,72.8,Arsenal
+2024-11-29,Brighton,Southampton,99.7,0.3,0.0,Brighton
+2024-11-30,Brentford,Leicester City,66.3,32.6,1.2,Brentford
+2024-11-30,Crystal Palace,Newcastle Utd,85.8,5.8,8.4,Crystal Palace
+2024-11-30,Nottingham Forest,Ipswich Town,88.8,8.7,2.5,Nottingham Forest
+2024-11-30,Wolves,Bournemouth,4.2,4.2,91.7,Bournemouth
+2024-11-30,West Ham,Arsenal,5.4,18.2,76.5,Arsenal
+2024-12-01,Chelsea,Aston Villa,28.8,29.5,41.7,Aston Villa
+2024-12-01,Manchester Utd,Everton,69.7,6.5,23.8,Manchester Utd
+2024-12-01,Tottenham,Fulham,17.7,1.3,81.0,Fulham
+2024-12-01,Liverpool,Manchester City,13.1,18.3,68.6,Manchester City

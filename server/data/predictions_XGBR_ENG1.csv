@@ -1,11 +1,11 @@
 Date,Home_Team,Away_Team,Predicted_GF_Home,Predicted_GF_Away
-2024-11-09,Brentford,Bournemouth,3.0,1.0
-2024-11-09,Crystal Palace,Fulham,1.0,2.0
-2024-11-09,West Ham,Everton,1.0,1.0
-2024-11-09,Wolves,Southampton,2.0,2.0
-2024-11-09,Brighton,Manchester City,1.0,3.0
-2024-11-09,Liverpool,Aston Villa,2.0,1.0
-2024-11-10,Manchester Utd,Leicester City,2.0,2.0
-2024-11-10,Nottingham Forest,Newcastle Utd,2.0,2.0
-2024-11-10,Tottenham,Ipswich Town,3.0,1.0
-2024-11-10,Chelsea,Arsenal,1.0,2.0
+2024-11-29,Brighton,Southampton,2.0,1.0
+2024-11-30,Brentford,Leicester City,2.0,1.0
+2024-11-30,Crystal Palace,Newcastle Utd,1.0,0.0
+2024-11-30,Nottingham Forest,Ipswich Town,2.0,1.0
+2024-11-30,Wolves,Bournemouth,1.0,2.0
+2024-11-30,West Ham,Arsenal,-0.0,2.0
+2024-12-01,Chelsea,Aston Villa,2.0,0.0
+2024-12-01,Manchester Utd,Everton,2.0,0.0
+2024-12-01,Tottenham,Fulham,3.0,1.0
+2024-12-01,Liverpool,Manchester City,1.0,2.0

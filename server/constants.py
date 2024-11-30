@@ -13,3 +13,8 @@ league_id = {
     'Premier League': 9
 }
 
+HEADERS = {
+    "User-Agent": None,
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://fbref.com/en",
+}

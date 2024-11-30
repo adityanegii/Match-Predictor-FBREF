@@ -14,6 +14,18 @@ This Match Predictor is a Python-based tool that uses various classifiers and re
 
 - Uses FBREF's scraped data for training and prediction.
 
+## Running
+
+Open up a terminal and navigate to the directory where the project is located.
+
+First create a virtual environment using `python -m venv venv` on Windows or `python3 -m venv venv` on macOS or Linux and then activate it using `venv/scripts/activate` on Windows`source venv/bin/activate` for macOS and Linux. Then install the required libraries using `pip install -r requirements.txt`.
+
+Then navigate to the server directory and run the app.py file using `python app.py` on Windows or `python3 app.py` on macOS and Linux. This will start the server. Then in another terminal window navigate to the web client directory and run `npm install` to install the required libraries. Then run `npm run dev` to start the frontend. This will open up a browser window with the Match Predictor on `http://localhost:3000/`.
+
+I have included the predictions for one Matchweek (check the predicitions*.csv to see exactly which matchweek it is) if you are interested in seeing the functionality of this project quickly and just seeing the display function. 
+
+If you want to see the predictions for the set of upcoming fixtures, press the "Scrape" button to retrieve the new data, then after the data has been scraped click the "Train Models" button to train and make predictions. This is still a feature I am working on to make faster and more efficient. If you just want to scrape for 1 league in particular, you can change the url to scrape in the `main.py` file in the scrape function. I have commented out the urls for the the top 5 leagues individually, and left the url for the whole top 5 leagues combined.
+
 ## Requirements
 
 Make sure you have a valid version of Python installed on your computer. This project was developped in 
@@ -38,20 +50,6 @@ The following libraries are required to run the Match Predictor:
 
 Make sure to install the required libraries before running the Match Predictor.
 
-## Running
-
-First, make sure you run the app.py from the server directory. Then run `npm run dev` from the 
-frontend directory. I have included the predictions for a recent Matchweek (check the predicitions*.csv to see exactly which matchweek it is) if you are interested in seeing the functionality of this project quickly. 
-
-If you want to see the predictions for the set of upcoming fixtures, press the train and predict button on your browser.
-This will take time as it scrapes for data, trains the models, and make the predictions. This is still a feature 
-I am working on to make faster
-
-To run a python file, first go into your terminal and go to the directory where the file you want to 
-run is (so `cd <ENTER ABSOLUTE PATH TO SERVER DIRECTORY>`) and then use `python <filename>` for Windows and 
-`python3 <filename>` for macOS and Linux.
-
-When on the browser, you can press the scrape button to scrape the data from FBREF. This will take a while. Conversly you can press the train and predict button to train the models and make predictions from existing data (this option will not be available since there is no data to start with). You can also check the predictions for different models by selecting from the drop down menus (this is available since I have included recent prediction files).
 
 ## Acknowledgements
 

@@ -4,14 +4,13 @@ import GeneralButton from "@/components/GeneralButton";
 import { useState } from "react";
 import { League, Model } from "@/utils/types";
 import { LEAGUES, MODELS } from "@/utils/constants";
-import ProbabilityBar from "@/components/ProbabilityBar";
 import Table from "@/components/Table";
 
 export default function Home() {
   const [selectedModel, setSelectedModel] = useState<Model | null>(null);
   const [selectedLeague, setSelectedLeague] = useState<League | null>(null);
-  const [isScraping, setIsScraping] = useState<boolean>(false);
-  const [isTraining, setIsTraining] = useState<boolean>(false);
+  const [trainText, setTrainText] = useState<string>("Train Models");
+  const [scrapeText, setScrapeText] = useState<string>("Scrape Data");
 
   const getPredictions = (league: string, model: string) => {
 
@@ -29,16 +28,26 @@ export default function Home() {
 
   const handleScrape = () => {
     const fetchData = async () => {
+      let intervalId: NodeJS.Timeout | null = null;
       try {
-        setIsScraping(true);
-        // const response = await fetch('http://127.0.0.1:8080/api/scrape');
-        const response = await fetch('http://127.0.0.1:8080/api/test');
+        // Start dynamic loading animation
+        const scrapingTexts = ["Scraping.", "Scraping..", "Scraping..."];
+        let textIndex = 0;
+
+        intervalId = setInterval(() => {
+          setScrapeText(scrapingTexts[textIndex]);
+          textIndex = (textIndex + 1) % scrapingTexts.length;
+        }, 500); // Change text every 500ms
+
+        const response = await fetch('http://127.0.0.1:8080/api/scrape');
+        // const response = await fetch('http://127.0.0.1:8080/api/test');
         const responseData = await response.json();
         // console.log(responseData.message);
       } catch (error) {
         console.error('Error scraping data: ', error);
       } finally {
-        setIsScraping(false);
+        if (intervalId) clearInterval(intervalId); // Stop the interval
+        setScrapeText("Scrape Data"); // Reset button text
       }
     };
     fetchData();
@@ -46,16 +55,26 @@ export default function Home() {
 
   const handleTrain = () => {
     const fetchData = async () => {
+      let intervalId: NodeJS.Timeout | null = null;
       try {
-        setIsTraining(true);
-          // const response = await fetch('http://127.0.0.1:8080/api/train-and-predict');
-          const response = await fetch('http://127.0.0.1:8080/api/test');
+        // Start dynamic loading animation
+        const trainingTexts = ["Training.", "Training..", "Training..."];
+        let textIndex = 0;
+
+        intervalId = setInterval(() => {
+          setTrainText(trainingTexts[textIndex]);
+          textIndex = (textIndex + 1) % trainingTexts.length;
+        }, 500); // Change text every 500ms
+
+          const response = await fetch('http://127.0.0.1:8080/api/train-and-predict');
+          // const response = await fetch('http://127.0.0.1:8080/api/test');
           const responseData = await response.json();
           // console.log(responseData.message);
       } catch (error) {
           console.error('Error fetching data: ', error);
       } finally {
-          setIsTraining(false);
+        if (intervalId) clearInterval(intervalId); // Stop the interval
+        setTrainText("Train Models"); // Reset button text
       }
     };
     fetchData();
@@ -68,10 +87,10 @@ export default function Home() {
 
         <div className="flex gap-24 items-center">
           <GeneralButton primary size="m" buttonClick={handleScrape}>
-            {isScraping ? "Scraping Data..." : "Scrape Data"}
+            {scrapeText}
           </GeneralButton>
           <GeneralButton primary size="m" buttonClick={handleTrain}>
-            {isTraining ? "Getting Predictions..." : "Predict"}
+            {trainText}
           </GeneralButton>
           <DropDown items={LEAGUES} onSelect={handleLeagueSelect} text="Select League" />
           <DropDown items={MODELS} onSelect={handleModelSelect} text="Select Model" />

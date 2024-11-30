@@ -13,8 +13,12 @@ import pandas as pd
 def scrape():
     # Scrape Data
     years = list(range(2024, 2020, - 1))
-    # url = "https://fbref.com/en/comps/Big5/Big-5-European-Leagues-Stats"
-    url = "https://fbref.com/en/comps/9/Premier-League-Stats"
+    url = "https://fbref.com/en/comps/Big5/Big-5-European-Leagues-Stats"
+    # url = "https://fbref.com/en/comps/9/Premier-League-Stats"
+    # url = "https://fbref.com/en/comps/11/Serie-A-Stats"
+    # url = "https://fbref.com/en/comps/12/La-Liga-Stats"
+    # url = "https://fbref.com/en/comps/13/Ligue-1-Stats"
+    # url = "https://fbref.com/en/comps/20/Bundesliga-Stats"
     scraper.scrape(years, url)
 
 def process(df, league):
