@@ -35,7 +35,7 @@ This project uses multiple libraries for the server (the Python backend). Make s
 to install them correctly using  `pip install -r requirements.txt`. (The last one (Requests) should
 normally come with the default Python installation.
 
-The following libraries are required to run the Match Predictor:
+The following libraries are required to run the Match Predictor (I have only listed the main ones, install the requirements.txt to make sure everything works properly):
 
 | Library | URL |
 | ------- | ------------ |
@@ -47,6 +47,7 @@ The following libraries are required to run the Match Predictor:
 | Flask | https://flask.palletsprojects.com/en/3.0.x/ |
 | flask_cors | https://flask-cors.readthedocs.io/en/latest/ |
 | Requests | https://requests.readthedocs.io/en/latest/ |
+| Fake useragent | https://github.com/fake-useragent/fake-useragent |
 
 Make sure to install the required libraries before running the Match Predictor.
 
