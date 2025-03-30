@@ -62,8 +62,7 @@ def clean_data(matches_df):
     # Get all past fixtures and the next fixture for each team
     matches_df = pd.concat([past_fixtures, unique_opponents])
     matches_df = matches_df.sort_values(by=['season', 'team', 'date'], ascending=[False, True, True])
-
-
+    
     # Convert column data to numeric
     matches_df["date"] = pd.to_datetime(matches_df["date"])
     matches_df["day_code"] = matches_df["date"].dt.dayofweek
@@ -72,8 +71,8 @@ def clean_data(matches_df):
     matches_df["opp_code"] = matches_df["opponent"].astype('category').cat.codes
     matches_df["hour"] = matches_df["time"].str.replace(":.+", "", regex=True).astype("int")
     matches_df["pts"] = matches_df["result"].map({'W': 3, 'D': 1, 'L': 0})
-    matches_df["gf"] = matches_df["gf"].astype("Int64")
-    matches_df["ga"] = matches_df["ga"].astype("Int64")
+    matches_df["gf"] = matches_df["gf"].astype("float64")
+    matches_df["ga"] = matches_df["ga"].astype("float64")
 
 
     teams = matches_df['team'].unique().tolist()
@@ -98,18 +97,18 @@ def clean_data(matches_df):
     return pd.concat(dfs).sort_values(by=['team', 'date']).reset_index(drop=True)
 
 def get_overall_averages(final_matches):
+    cols = list()
     with open("data/cols.txt", "r") as f:
-        cols = f.read()
-        cols = cols.split(",")
-    cols = [x.strip() for x in cols]
-    final_matches[cols] = final_matches[cols].astype(float)
+        for line in f:
+            cols.append(line.strip())
 
+    final_matches[cols] = final_matches[cols].astype(float)
+    
     rolling_averages = final_matches.groupby('team')[cols].rolling(window=WINDOW, min_periods=3, closed='left').mean()
     rolling_averages.reset_index(level=0, drop=True, inplace=True)
 
     overall_averages = final_matches.groupby('team')[cols].apply(lambda x: x.shift().expanding().mean())
     overall_averages.reset_index(level=0, drop=True, inplace=True)
-
     return pd.concat([final_matches, rolling_averages.add_suffix('_rolling'), overall_averages.add_suffix('_mean')], axis=1)
 
 def combine(df):
@@ -131,6 +130,7 @@ def mark_promoted(df):
     # df["year"] = df["date"].dt.year
 
     # df["season"] = pd.to_datetime(df["season"])
+
     teams_per_year = df.groupby("season")["home_team"].unique()
     first_year = df["season"].min()
 
@@ -142,7 +142,7 @@ def mark_promoted(df):
     for year, teams in teams_per_year.items():
         if year == first_year:
             continue
-        prev_year = year - 1
+        prev_year = str(int(year) - 1)
         prev_teams = teams_per_year[prev_year]
         promoted_teams = [x for x in teams if x not in prev_teams]
 

@@ -1,9 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2024-10-04,Hellas Verona,Venezia,43.6,33.8,22.5,Hellas Verona
-2024-10-05,Udinese,Lecce,35.4,38.2,26.4,Draw
-2024-10-05,Atalanta,Genoa,61.6,22.7,15.7,Atalanta
-2024-10-05,Inter,Torino,59.1,22.0,18.9,Inter
-2024-10-06,Juventus,Cagliari,48.5,26.8,24.7,Juventus
-2024-10-06,Lazio,Empoli,56.0,26.4,17.6,Lazio
-2024-10-06,Monza,Roma,24.7,31.4,43.9,Roma
-2024-10-06,Fiorentina,Milan,39.9,25.8,34.2,Fiorentina
+2025-03-29,Como,Empoli,33.7,30.9,35.4,Empoli
+2025-03-29,Venezia,Bologna,26.8,33.3,39.9,Bologna
+2025-03-29,Juventus,Genoa,48.5,26.3,25.1,Juventus
+2025-03-29,Lecce,Roma,46.7,28.4,24.9,Lecce
+2025-03-30,Cagliari,Monza,39.5,28.3,32.2,Cagliari
+2025-03-30,Fiorentina,Atalanta,37.0,28.8,34.2,Fiorentina
+2025-03-30,Inter,Udinese,51.5,30.4,18.1,Inter
+2025-03-30,Napoli,Milan,44.1,29.0,26.9,Napoli
+2025-03-31,Hellas Verona,Parma,47.6,27.0,25.5,Hellas Verona
+2025-03-31,Lazio,Torino,48.1,24.5,27.4,Lazio

@@ -3,9 +3,18 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import csv
 from main import scrape, train_and_predict
+from database import init_db
 
-app = Flask(__name__)
-CORS(app)
+def create_app():
+    app = Flask(__name__)
+    CORS(app)
+
+    with app.app_context():
+        init_db()
+    
+    return app
+
+app = create_app()
 
 @app.route("/api/ENG1/RFC", methods=['GET'])
 def get_pl_rfc():

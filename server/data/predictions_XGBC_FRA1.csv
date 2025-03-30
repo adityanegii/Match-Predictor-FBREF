@@ -1,10 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2024-10-04,Marseille,Angers,68.8,30.5,0.7,Marseille
-2024-10-05,Saint-Étienne,Auxerre,90.1,9.8,0.0,Saint-Étienne
-2024-10-05,Lille,Toulouse,62.2,31.4,6.4,Lille
-2024-10-05,Rennes,Monaco,1.6,86.6,11.8,Draw
-2024-10-06,Lyon,Nantes,17.7,80.1,2.1,Draw
-2024-10-06,Brest,Le Havre,95.5,4.4,0.1,Brest
-2024-10-06,Reims,Montpellier,47.8,37.0,15.3,Reims
-2024-10-06,Strasbourg,Lens,7.0,11.1,81.8,Lens
-2024-10-06,Nice,PSG,4.7,43.8,51.5,PSG
+2025-03-28,Strasbourg,Lyon,0.0,4.9,95.1,Lyon
+2025-03-29,Reims,Marseille,1.7,73.5,24.8,Draw
+2025-03-29,Saint-Étienne,PSG,0.0,0.0,100.0,PSG
+2025-03-29,Monaco,Nice,99.6,0.0,0.4,Monaco
+2025-03-30,Toulouse,Brest,0.0,26.6,73.4,Brest
+2025-03-30,Angers,Rennes,0.0,2.6,97.4,Rennes
+2025-03-30,Auxerre,Montpellier,0.4,0.0,99.6,Montpellier
+2025-03-30,Le Havre,Nantes,0.8,0.0,99.2,Nantes
+2025-03-30,Lille,Lens,100.0,0.0,0.0,Lille
