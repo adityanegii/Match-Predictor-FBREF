@@ -14,6 +14,8 @@ This Match Predictor is a Python-based tool that uses various classifiers and re
 
 - Uses FBREF's scraped data for training and prediction.
 
+- Uses SQLite and SQLAlchemy to store raw data that has been scraped in order to shorten scraping times.
+
 ## Running
 
 Open up a terminal and navigate to the directory where the project is located.
