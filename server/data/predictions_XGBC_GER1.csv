@@ -1,10 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2025-03-28,Bayer Leverkusen,Bochum,100.0,0.0,0.0,Bayer Leverkusen
-2025-03-29,Bayern Munich,St Pauli,100.0,0.0,0.0,Bayern Munich
-2025-03-29,Hoffenheim,Augsburg,100.0,0.0,0.0,Hoffenheim
-2025-03-29,Holstein Kiel,Werder Bremen,0.0,0.0,100.0,Werder Bremen
-2025-03-29,Monchengladbach,RB Leipzig,51.1,0.0,48.9,Monchengladbach
-2025-03-29,Wolfsburg,Heidenheim,80.0,1.6,18.4,Wolfsburg
-2025-03-29,Eintracht Frankfurt,Stuttgart,0.3,47.4,52.2,Stuttgart
-2025-03-30,Freiburg,Union Berlin,99.4,0.5,0.0,Freiburg
-2025-03-30,Dortmund,Mainz 05,0.0,100.0,0.0,Draw
+2025-04-04,Augsburg,Bayern Munich,0.8,0.5,98.7,Bayern Munich
+2025-04-05,Bochum,Stuttgart,1.0,0.6,98.4,Stuttgart
+2025-04-05,Freiburg,Dortmund,13.8,21.4,64.8,Dortmund
+2025-04-05,Heidenheim,Bayer Leverkusen,0.0,0.1,99.9,Bayer Leverkusen
+2025-04-05,Mainz 05,Holstein Kiel,79.5,16.4,4.1,Mainz 05
+2025-04-05,RB Leipzig,Hoffenheim,61.5,22.5,16.1,RB Leipzig
+2025-04-05,Werder Bremen,Eintracht Frankfurt,7.5,7.5,85.0,Eintracht Frankfurt
+2025-04-06,St Pauli,Monchengladbach,53.0,14.7,32.3,St Pauli
+2025-04-06,Union Berlin,Wolfsburg,28.7,4.7,66.6,Wolfsburg

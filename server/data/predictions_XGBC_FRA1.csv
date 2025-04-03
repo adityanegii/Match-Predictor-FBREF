@@ -1,10 +1,10 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2025-03-28,Strasbourg,Lyon,0.0,4.9,95.1,Lyon
-2025-03-29,Reims,Marseille,1.7,73.5,24.8,Draw
-2025-03-29,Saint-Étienne,PSG,0.0,0.0,100.0,PSG
-2025-03-29,Monaco,Nice,99.6,0.0,0.4,Monaco
-2025-03-30,Toulouse,Brest,0.0,26.6,73.4,Brest
-2025-03-30,Angers,Rennes,0.0,2.6,97.4,Rennes
-2025-03-30,Auxerre,Montpellier,0.4,0.0,99.6,Montpellier
-2025-03-30,Le Havre,Nantes,0.8,0.0,99.2,Nantes
-2025-03-30,Lille,Lens,100.0,0.0,0.0,Lille
+2025-04-04,Nice,Nantes,27.1,71.0,1.9,Draw
+2025-04-05,PSG,Angers,96.8,2.5,0.6,PSG
+2025-04-05,Brest,Monaco,76.1,3.5,20.4,Brest
+2025-04-05,Lyon,Lille,94.9,3.7,1.4,Lyon
+2025-04-06,Lens,Saint-Étienne,77.1,21.4,1.5,Lens
+2025-04-06,Montpellier,Le Havre,7.3,0.2,92.5,Le Havre
+2025-04-06,Reims,Strasbourg,1.7,1.0,97.3,Strasbourg
+2025-04-06,Rennes,Auxerre,49.7,16.1,34.2,Rennes
+2025-04-06,Marseille,Toulouse,98.9,0.3,0.8,Marseille

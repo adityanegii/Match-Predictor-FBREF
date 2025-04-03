@@ -1,11 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2025-03-29,Como,Empoli,33.7,30.9,35.4,Empoli
-2025-03-29,Venezia,Bologna,26.8,33.3,39.9,Bologna
-2025-03-29,Juventus,Genoa,48.5,26.3,25.1,Juventus
-2025-03-29,Lecce,Roma,46.7,28.4,24.9,Lecce
-2025-03-30,Cagliari,Monza,39.5,28.3,32.2,Cagliari
-2025-03-30,Fiorentina,Atalanta,37.0,28.8,34.2,Fiorentina
-2025-03-30,Inter,Udinese,51.5,30.4,18.1,Inter
-2025-03-30,Napoli,Milan,44.1,29.0,26.9,Napoli
-2025-03-31,Hellas Verona,Parma,47.6,27.0,25.5,Hellas Verona
-2025-03-31,Lazio,Torino,48.1,24.5,27.4,Lazio
+2025-04-04,Genoa,Udinese,28.6,38.0,33.4,Draw
+2025-04-05,Monza,Como,36.0,34.7,29.3,Monza
+2025-04-05,Parma,Inter,17.6,25.3,57.0,Inter
+2025-04-05,Milan,Fiorentina,58.7,23.5,17.9,Milan
+2025-04-06,Lecce,Venezia,33.0,42.1,24.9,Draw
+2025-04-06,Empoli,Cagliari,31.3,40.4,28.3,Draw
+2025-04-06,Torino,Hellas Verona,44.6,34.4,21.0,Torino
+2025-04-06,Atalanta,Lazio,49.9,24.2,25.8,Atalanta
+2025-04-06,Roma,Juventus,41.2,30.0,28.8,Roma
+2025-04-07,Bologna,Napoli,37.8,27.5,34.8,Bologna
