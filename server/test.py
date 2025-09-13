@@ -13,7 +13,7 @@ from constants import *
 from constants import DATE
 
 def process(df, file=False):
-    r_df = DP.combine(DP.get_overall_averages(DP.clean_data(df), file))
+    r_df = DP.combine(DP.get_averages(DP.clean_data(df), file))
     r_df.to_csv(CLEAN_DATA)
     return r_df
 

@@ -1,5 +1,6 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
+import numpy as np
 
 class RFC():
     def __init__(self, params=None):
@@ -30,8 +31,8 @@ class RFC():
     def predict(self, data, predictors):
         X = data[predictors]
         y = data['result_code']
-        preds = self.model.predict(X)
         probs = self.model.predict_proba(X)  # Obtain the predicted probabilities
+        preds = np.argmax(probs, axis=1)  # Get the class with the highest probability
 
         # Create a new DataFrame with the desired columns
         result_df = data.copy()

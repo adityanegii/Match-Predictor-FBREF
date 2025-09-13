@@ -58,7 +58,7 @@ const Table: React.FC<TableProps> = ({ league, model }) => {
     );
   }
 
-  if (model.id === 'RFC' || model.id === 'XGBC') {
+  if (model.id === 'RFC' || model.id === 'XGBC' || model.id === 'SVC' || model.id === 'LR' || model.id === 'Ensemble') {
     return (
       <div className={styles.container}>
         <table className={styles.table}>

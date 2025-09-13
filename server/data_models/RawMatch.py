@@ -1,4 +1,4 @@
-from sqlalchemy import create_engine, Column, String, Float, DateTime
+from sqlalchemy import Column, String, Float, DateTime, Integer
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -98,6 +98,8 @@ class RawMatch(Base):
     aerial_won = Column(Float)
     aerial_lost = Column(Float)
     aerial_won_pct = Column(Float)
+    days_since_last_game = Column(Integer)
+    is_first_game = Column(Integer)
 
     # Passing
     tot_pass_cmp = Column(Float)

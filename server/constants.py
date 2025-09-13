@@ -15,7 +15,7 @@ league_id = {
 
 league_full = {
     'ENG1': 'Premier League',
-    'ESP1': 'La Liga',
+    'SPA1': 'La Liga',
     'GER1': 'Bundesliga',
     'ITA1': 'Serie A',
     'FRA1': 'Ligue 1'
@@ -29,4 +29,6 @@ HEADERS = {
 
 DATABASE_URL = "sqlite:///data/FBREF_matches.sqlite"
 
-current_year = 2024
+current_year = 2025
+
+CHROMEDRIVER_PATH = "C:\\Users\\negia\\Desktop\\Programming\\Match-Predictor-FBREF\\server\\helper_notebooks\\chromedriver.exe"

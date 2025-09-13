@@ -1,8 +1,11 @@
 Date,Home_Team,Away_Team,Prob_Home_Win,Prob_Draw,Prob_Away_Win,Predicted_Winner
-2025-04-02,Bournemouth,Ipswich Town,97.1,0.7,2.2,Bournemouth
-2025-04-02,Brighton,Aston Villa,35.8,42.4,21.8,Draw
-2025-04-02,Manchester City,Leicester City,90.0,9.9,0.1,Manchester City
-2025-04-02,Newcastle Utd,Brentford,67.2,22.7,10.1,Newcastle Utd
-2025-04-02,Southampton,Crystal Palace,0.7,45.3,54.0,Crystal Palace
-2025-04-02,Liverpool,Everton,97.4,2.0,0.6,Liverpool
-2025-04-03,Chelsea,Tottenham,99.9,0.1,0.0,Chelsea
+2025-09-13,Arsenal,Nottingham Forest,61.5,34.4,4.1,Arsenal
+2025-09-13,Bournemouth,Brighton,88.4,2.5,9.0,Bournemouth
+2025-09-13,Crystal Palace,Sunderland,25.7,9.4,64.9,Sunderland
+2025-09-13,Everton,Aston Villa,20.7,4.0,75.3,Aston Villa
+2025-09-13,Fulham,Leeds United,49.0,14.2,36.7,Fulham
+2025-09-13,Newcastle Utd,Wolves,97.9,1.7,0.4,Newcastle Utd
+2025-09-13,West Ham,Tottenham,5.1,6.3,88.7,Tottenham
+2025-09-13,Brentford,Chelsea,90.0,0.2,9.7,Brentford
+2025-09-14,Burnley,Liverpool,0.2,1.1,98.7,Liverpool
+2025-09-14,Manchester City,Manchester Utd,3.9,11.2,84.9,Manchester Utd

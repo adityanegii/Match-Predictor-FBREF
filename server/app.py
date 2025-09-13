@@ -44,6 +44,20 @@ def get_pl_xgbr():
 
     return jsonify(csv_data)
 
+@app.route("/api/ENG1/SVC", methods=['GET'])
+def get_pl_svc():
+    with open("data/predictions_SVC_1v1_ENG1.csv") as f:
+        csv_data = list(csv.DictReader(f))
+
+    return jsonify(csv_data)
+
+@app.route("/api/ENG1/LR", methods=['GET'])
+def get_pl_lr():
+    with open("data/predictions_LR_1v1_ENG1.csv") as f:
+        csv_data = list(csv.DictReader(f))
+
+    return jsonify(csv_data)
+
 @app.route("/api/FRA1/RFC", methods=['GET'])
 def get_l1_rfc():
     with open("data/predictions_RFC_FRA1.csv") as f:
@@ -156,6 +170,13 @@ def get_pd_xgbr():
 
     return jsonify(csv_data)
 
+@app.route("/api/ENG1/Ensemble", methods=['GET'])
+def get_pl_ensemble():
+    with open("data/predictions_Ensemble_ENG1.csv") as f:
+        csv_data = list(csv.DictReader(f))
+
+    return jsonify(csv_data)
+
 @app.route("/api/train-and-predict")
 def predict():
     try:
@@ -170,6 +191,7 @@ def scrape_data():
         scrape()
         return jsonify({"message": "OK"})
     except Exception as e:
+        print(e)
         return jsonify({"message": f"Error {e}"})
 
 
@@ -179,6 +201,7 @@ def test():
         time.sleep(5)
         return jsonify({"message": "Test OK"})
     except Exception as e:
+        print(e)
         return jsonify({"message": f"Error {e}"})
 
 if __name__ == "__main__":
