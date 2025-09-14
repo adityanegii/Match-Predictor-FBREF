@@ -13,7 +13,7 @@ export const MODELS: Model[] = [
     { name: "Random Forest Classifier", id: "RFC" },
     // { name: "XGBoost Regressor", id: "XGBR" },
     { name: "XGBoost Classifier", id: "XGBC" },
-    { name: "Support Vector Classifier", id: "SVC" },
-    { name: "Logistic Regression", id: "LR" },
+    { name: "Support Vector Classifier", id: "SVC_1v1" },
+    { name: "Logistic Regression", id: "LR_1v1" },
     { name: "Ensemble Model", id: "Ensemble" },
 ];

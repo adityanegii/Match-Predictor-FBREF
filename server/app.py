@@ -16,166 +16,20 @@ def create_app():
 
 app = create_app()
 
-@app.route("/api/ENG1/RFC", methods=['GET'])
-def get_pl_rfc():
-    with open("data/predictions_RFC_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
 
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/XGBC", methods=['GET'])
-def get_pl_xgbc():
-    with open("data/predictions_XGBC_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/RFR", methods=['GET'])
-def get_pl_rfr():
-    with open("data/predictions_RFR_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/XGBR", methods=['GET'])
-def get_pl_xgbr():
-    with open("data/predictions_XGBR_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/SVC", methods=['GET'])
-def get_pl_svc():
-    with open("data/predictions_SVC_1v1_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/LR", methods=['GET'])
-def get_pl_lr():
-    with open("data/predictions_LR_1v1_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/FRA1/RFC", methods=['GET'])
-def get_l1_rfc():
-    with open("data/predictions_RFC_FRA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/FRA1/XGBC", methods=['GET'])
-def get_l1_xgbc():
-    with open("data/predictions_XGBC_FRA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/FRA1/RFR", methods=['GET'])
-def get_l1_rfr():
-    with open("data/predictions_RFR_FRA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/FRA1/XGBR", methods=['GET'])
-def get_l1_xgbr():
-    with open("data/predictions_XGBR_FRA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)    
-
-@app.route("/api/GER1/RFC", methods=['GET'])
-def get_bl_rfc():
-    with open("data/predictions_RFC_GER1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)    
-
-@app.route("/api/GER1/XGBC", methods=['GET'])
-def get_bl_xgbc():
-    with open("data/predictions_XGBC_GER1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)    
-
-@app.route("/api/GER1/RFR", methods=['GET'])
-def get_bl_rfr():
-    with open("data/predictions_RFR_GER1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/GER1/XGBR", methods=['GET'])
-def get_bl_xgbr():
-    with open("data/predictions_XGBR_GER1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ITA1/RFC", methods=['GET'])
-def get_sa_rfc():
-    with open("data/predictions_RFC_ITA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ITA1/XGBC", methods=['GET'])
-def get_sa_xgbc():
-    with open("data/predictions_XGBC_ITA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ITA1/RFR", methods=['GET'])
-def get_sa_rfr():
-    with open("data/predictions_RFR_ITA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ITA1/XGBR", methods=['GET'])
-def get_sa_xgbr():
-    with open("data/predictions_XGBR_ITA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/SPA1/RFC", methods=['GET'])
-def get_pd_rfc():
-    with open("data/predictions_RFC_SPA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/SPA1/XGBC", methods=['GET'])
-def get_pd_xgbc():
-    with open("data/predictions_XGBC_SPA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/SPA1/RFR", methods=['GET'])
-def get_pd_rfr():
-    with open("data/predictions_RFR_SPA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/SPA1/XGBR", methods=['GET'])
-def get_pd_xgbr():
-    with open("data/predictions_XGBR_SPA1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
-
-@app.route("/api/ENG1/Ensemble", methods=['GET'])
-def get_pl_ensemble():
-    with open("data/predictions_Ensemble_ENG1.csv") as f:
-        csv_data = list(csv.DictReader(f))
-
-    return jsonify(csv_data)
+@app.route("/api/<league>/<model>", methods=['GET'])
+def get_predictions(league, model):
+    """
+    league: ENG1, FRA1, GER1, ITA1, SPA1
+    model: RFC, XGBC, RFR, XGBR, SVC, LR, Ensemble
+    """
+    try:
+        filepath = f"data/predictions_{model}_{league}.csv"
+        with open(filepath) as f:
+            csv_data = list(csv.DictReader(f))
+        return jsonify(csv_data)
+    except FileNotFoundError:
+        return jsonify({"error": f"No data found for {model} - {league}"}), 404
 
 @app.route("/api/train-and-predict")
 def predict():
