@@ -21,6 +21,8 @@ This Match Predictor is a Python-based tool that uses various classifiers and re
 
 ## Running
 
+First edit the constants.py file in the server directory to set the chromedriver path. You will need to install the chromedriver that matches your version of Chrome and your architecture (https://googlechromelabs.github.io/chrome-for-testing/).
+
 Open up a terminal and navigate to the directory where the project is located.
 
 First create a virtual environment using `python -m venv venv` on Windows or `python3 -m venv venv` on macOS or Linux and then activate it using `venv/scripts/activate` on Windows`source venv/bin/activate` for macOS and Linux. Then install the required libraries using `pip install -r requirements.txt`.
@@ -53,6 +55,7 @@ The following libraries are required to run the Match Predictor (I have only lis
 | Requests | https://requests.readthedocs.io/en/latest/ |
 | Fake useragent | https://github.com/fake-useragent/fake-useragent |
 | SQL Alchemy | https://www.sqlalchemy.org/ |
+| Selenium | https://www.selenium.dev/ |
 
 Make sure to install the required libraries before running the Match Predictor.
 
