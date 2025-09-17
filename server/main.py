@@ -3,21 +3,24 @@ import data_processor as DP
 
 from constants import *
 
-from models.RandomForestRegressor import RFR
-from models.RandomForestClassifier import RFC
-from models.XGBRegressor import XGBR
-from models.XGBClassifier import XGBC
-from models.SVC import SVCWrapper
-from models.LR import LRWrapper
+from models.classification.soft_voting import soft_voting
+from models.regression.RandomForestRegressor import RFR
+from models.classification.RandomForestClassifier import RFC
+from models.regression.XGBRegressor import XGBR
+from models.classification.XGBClassifier import XGBC
+from models.classification.SVC import SVCWrapper
+from models.classification.LR import LRWrapper
 
 import pandas as pd
 
 from database import SessionLocal
 from data_models.Result import Result
 from data_models.RawMatch import RawMatch
-from sqlalchemy import insert, update, bindparam
+from sqlalchemy.dialects.sqlite import insert
 
 import numpy as np
+
+from utilities import get_predictors, map_predicted_result
 
 
 def scrape():
@@ -37,7 +40,7 @@ def scrape():
     finally:
         session.close()
 
-def process(league):
+def process(league: str) -> pd.DataFrame:
     try:
         league_name = league_full[league]
 
@@ -63,65 +66,8 @@ def process(league):
         session.close()
     return r_df
 
-def get_predictors_basic():
-    general = ["venue_code", "team_code", "day_code", "promoted"]
-    attacking = ["gf", "xg", "sh", "sot", "npxg", "npxg_per_sh"]
-    defense = ["int", "xga", "ga"]
-    gk = ["sota", "saves", "save_pct", "psxg"]
 
-    base = attacking + defense + gk
-    home_stats = [f"{x}_home_rolling" for x in base] + [f"{x}_home_mean" for x in base]
-    away_stats = [f"{x}_away_rolling" for x in base] + [f"{x}_away_mean" for x in base]
-    home_stats = [f"{x}_home" for x in home_stats] + [f"{x}_away" for x in home_stats]
-    away_stats = [f"{x}_home" for x in away_stats] + [f"{x}_away" for x in away_stats]
-    overall_home = [f"{x}_rolling_home" for x in base] + [f"{x}_mean_home" for x in base]
-    overall_away = [f"{x}_rolling_away" for x in base] + [f"{x}_mean_away" for x in base]
-    predictors = [f"{x}_home" for x in general] + [f"{x}_away" for x in general] + home_stats + away_stats + overall_home + overall_away
-    return predictors
-
-
-
-def get_predictors():
-    general = ["venue_code", "team_code", "day_code", "promoted"]
-    attacking = ["gf", "xg", "sh", "sot", "npxg", "npxg_per_sh"]
-    # passing = ["totpasscmp", "totpassatt", "totpasscmp_pct", "totpassdist", "prgpassdist", "xag", "xa", "keypasses"]
-    passing = ["xag", "xa", "keypasses"]
-    gk = ["sota", "saves", "save_pct", "psxg"]
-    ca = ["sca", "gca", "sca_live_pass", "gca_live_pass"]
-    # possesion = ["poss", "att3rdtouches", "attboxtouches", "atttakeons", "succtakeons", "carries", "totdistcarried", "prgdistcarried"]
-    defense = ["tkls", "tkls_won", "tkls_def_3rd", "tkls_mid_3rd", "tkls_att_3rd", "blocks", "int", "xga", "ga"]
-    # misc = ["fouls", "foulsdrawn", "recov", "aerialwon_pct"]
-
-    base = attacking + passing + gk + ca + defense
-    overall_home = [f"{x}_rolling_home" for x in base] + [f"{x}_mean_home" for x in base]
-    overall_away = [f"{x}_rolling_away" for x in base] + [f"{x}_mean_away" for x in base]
-
-    home_stats = [f"{x}_home_rolling" for x in base] + [f"{x}_home_mean" for x in base]
-    away_stats = [f"{x}_away_rolling" for x in base] + [f"{x}_away_mean" for x in base]
-
-    home_stats = [f"{x}_home" for x in home_stats] + [f"{x}_away" for x in home_stats]
-    away_stats = [f"{x}_home" for x in away_stats] + [f"{x}_away" for x in away_stats]
-
-    predictors = [f"{x}_home" for x in general] + [f"{x}_away" for x in general] + home_stats + away_stats + overall_home + overall_away
-
-    # with open("data/cols.txt", "r") as f:
-    #     cols = [line.strip() for line in f]
-    
-    # base = [f"{x}_rolling" for x in cols] + [f"{x}_mean" for x in cols]
-    # predictors = [f"{x}_home" for x in base] + [f"{x}_away" for x in base]  + [f"{x}_home" for x in general] + [f"{x}_away" for x in general]
-    
-    # return predictors
-    return get_predictors_basic()
-
-def map_predicted_result(row):
-    if row['Predicted_Result'] == 0:
-        return row['Away_Team']
-    elif row['Predicted_Result'] == 1:
-        return 'Draw'
-    elif row['Predicted_Result'] == 2:
-        return row['Home_Team']
-
-def predict_c(model, type, train_set, next_games, predictors, league, session):
+def predict_c(model, type, train_set, next_games, predictors, league):
     print("------------------TRAINING " + type + "------------------")
     try:
         r_df = model.train(train_set, predictors)
@@ -151,29 +97,6 @@ def predict_r(model, type, train_set, next_games, predictors, league):
         print("Error with", league)
         print(e)
         raise e
-
-def soft_voting(models: list[str], league: str):
-    # Open csvs
-    dfs = [pd.read_csv(f"data/predictions_{model}_{league}.csv") for model in models]
-
-    # Stack probabilities and compute average
-    prob_home = np.mean([df['Prob_Home_Win'].values / 100 for df in dfs], axis=0)
-    prob_draw = np.mean([df['Prob_Draw'].values / 100 for df in dfs], axis=0)
-    prob_away = np.mean([df['Prob_Away_Win'].values / 100 for df in dfs], axis=0)
-
-    # Determine final predicted result (0=Away,1=Draw,2=Home)
-    avg_probs = np.vstack([prob_away, prob_draw, prob_home]).T
-    final_preds = np.argmax(avg_probs, axis=1)
-
-    # Build result DataFrame
-    result_df = dfs[0][['Date', 'Home_Team', 'Away_Team']].copy()
-    result_df['Predicted_Result'] = final_preds
-    result_df['Prob_Home_Win'] = (prob_home * 100).round(1)
-    result_df['Prob_Draw'] = (prob_draw * 100).round(1)
-    result_df['Prob_Away_Win'] = (prob_away * 100).round(1)
-
-    result_df.to_csv(f"data/predictions_Ensemble_{league}.csv", index=False)
-
 
 def train_and_predict():
     session = SessionLocal()
@@ -209,11 +132,56 @@ def train_and_predict():
         # types_r = ["RFR", "XGBR"]
 
         for model, type in zip(models_c, types_c):
-            predict_c(model, type, train_set, next_games, predictors, league, session)
+            # predict_c(model, type, train_set, next_games, predictors, league, session)
+
+            # Train on full data and predict next games
+            model.train_full(train_set, predictors)
+            r_df = model.predict(next_games, predictors)
+            r_df['Predicted_Winner'] = r_df.apply(map_predicted_result, axis=1)
+            r_df = r_df.drop('Predicted_Result', axis=1)
+
+            records = r_df.to_dict(orient='records')
+
+            # Change column names to match Result model
+            records = [{ 'date': record['Date'],
+                         'home_team': record['Home_Team'],
+                         'away_team': record['Away_Team'],
+                         'league': league_full[league],
+                         'model_type': type,
+                         'home_win_prob': record.get('Prob_Home_Win', None),
+                         'draw_prob': record.get('Prob_Draw', None),
+                         'away_win_prob': record.get('Prob_Away_Win', None),
+                        } for record in records]
+
+            # Save to db
+            try:
+                stmt = insert(Result).values(records)
+
+                stmt = stmt.on_conflict_do_update(
+                    index_elements=['date', 'home_team', 'model_type'],
+                    set_={
+                        'away_team': stmt.excluded.away_team,
+                        'league': stmt.excluded.league,
+                        'home_win_prob': stmt.excluded.home_win_prob,
+                        'draw_prob': stmt.excluded.draw_prob,
+                        'away_win_prob': stmt.excluded.away_win_prob
+                    }
+                )
+
+                session.execute(stmt)
+                session.commit()
+            except Exception as e:
+                print(f"Error saving results to database for {league} with model {type}:\n{e}")
+                session.rollback()
+                raise e
+            
+
+            # r_df.to_csv("data/predictions_" + type + "_" + league + ".csv", index=False)
+        soft_voting(["RFC", "XGBC", "SVC_1v1", "LR_1v1"], league, session)
         
+
         session.close()
 
-        soft_voting(["RFC", "XGBC", "SVC_1v1", "LR_1v1"], league)
         # for model, type in zip(models_r, types_r):
         #     predict_r(model, type, train_set, next_games, predictors, league)
         print("\n\n\n")

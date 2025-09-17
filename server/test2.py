@@ -3,10 +3,10 @@ from sklearn.model_selection import ParameterGrid, train_test_split
 import numpy as np
 
 from constants import *
-from models.RandomForestClassifier import RFC
-from  models.RandomForestRegressor import RFR
-from  models.XGBClassifier import XGBC
-from  models.XGBRegressor import XGBR
+from server.models.classification.RandomForestClassifier import RFC
+from  server.models.regression.RandomForestRegressor import RFR
+from  server.models.classification.XGBClassifier import XGBC
+from  server.models.regression.XGBRegressor import XGBR
 import data_processor as DP
 
 def get_predictors():

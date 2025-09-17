@@ -36,6 +36,13 @@ class LRWrapper:
         }, index=idx_test)
 
         return result_df
+    
+    def train_full(self, data, predictors):
+        X = data[predictors]
+        y = data['result_code']
+
+        X_scaled = self.scaler.fit_transform(X)
+        self.model.fit(X_scaled, y)
 
     def predict(self, data, predictors):
         X = data[predictors]

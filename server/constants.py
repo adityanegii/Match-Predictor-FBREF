@@ -31,4 +31,4 @@ DATABASE_URL = "sqlite:///data/FBREF_matches.sqlite"
 
 current_year = 2025
 
-CHROMEDRIVER_PATH = ""
+CHROMEDRIVER_PATH = "C:\\Users\\negia\\Desktop\\Programming\\Match-Predictor-FBREF\\server\\helper_notebooks\\chromedriver.exe"

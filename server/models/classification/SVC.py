@@ -14,13 +14,13 @@ class SVCWrapper:
         else:
             self.model = OneVsOneClassifier(SVC(kernel='linear', random_state=42))
 
-    def train(self, data, predictors):
+    def train(self, data, predictors, split=0.25):
         X = data[predictors]
         y = data['result_code']
 
         X_scaled = self.scaler.fit_transform(X)
 
-        X_train, X_test, y_train, y_test, idx_train, idx_test = train_test_split(X_scaled, y, data.index, test_size=0.25, random_state=42)
+        X_train, X_test, y_train, y_test, idx_train, idx_test = train_test_split(X_scaled, y, data.index, test_size=split, random_state=42)
 
         self.model.fit(X_train, y_train)
 
@@ -36,6 +36,13 @@ class SVCWrapper:
         }, index=idx_test)
 
         return result_df
+    
+    def train_full(self, data, predictors):
+        X = data[predictors]
+        y = data['result_code']
+
+        X_scaled = self.scaler.fit_transform(X)
+        self.model.fit(X_scaled, y)
 
     def predict(self, data, predictors):
         X = data[predictors]

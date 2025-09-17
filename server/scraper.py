@@ -142,7 +142,6 @@ def scrape(link: str, session: sessionmaker) -> pd.DataFrame:
                 
                 # Merge all category dfs into one big df
                 team_data = matches[matches["Date"] != "Date"].dropna(subset=["Date"])
-                matches.to_csv("data/dump/matches.csv", index=False)
                 for df in dfs:
                     try:
                         t_df = df.dropna(subset=["Date"])
@@ -202,7 +201,6 @@ def scrape(link: str, session: sessionmaker) -> pd.DataFrame:
     print(years)
 
     records = matches_df.to_dict(orient="records")
-    print(len(records))
 
     if len(years) == 1:
         print("updating")
