@@ -36,8 +36,6 @@ def get_predictions(league, model):
     # Get latest (only today or later) Results from database
     session = SessionLocal()
     results = session.query(Result).filter(Result.league == league_full[league], Result.model_type == model, Result.date >= time.strftime("%Y-%m-%d")).all()
-    # results = session.query(Result).filter(Result.league == league_full[league], Result.model_type == model).all()
-    print("Results:", results)
     session.close()
 
     if results:
