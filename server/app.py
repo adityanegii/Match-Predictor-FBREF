@@ -3,7 +3,9 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import csv
 from main import scrape, train_and_predict
-from database import init_db
+from database import init_db, SessionLocal
+from data_models.Result import Result
+from constants import league_full
 
 def create_app():
     app = Flask(__name__)
@@ -23,13 +25,26 @@ def get_predictions(league, model):
     league: ENG1, FRA1, GER1, ITA1, SPA1
     model: RFC, XGBC, RFR, XGBR, SVC, LR, Ensemble
     """
-    try:
-        filepath = f"data/predictions_{model}_{league}.csv"
-        with open(filepath) as f:
-            csv_data = list(csv.DictReader(f))
-        return jsonify(csv_data)
-    except FileNotFoundError:
-        return jsonify({"error": f"No data found for {model} - {league}"}), 404
+    # try:
+    #     filepath = f"data/predictions_{model}_{league}.csv"
+    #     with open(filepath) as f:
+    #         csv_data = list(csv.DictReader(f))
+    #     return jsonify(csv_data)
+    # except FileNotFoundError:
+    #     return jsonify({"error": f"No data found for {model} - {league}"}), 404
+
+    # Get latest (only today or later) Results from database
+    session = SessionLocal()
+    results = session.query(Result).filter(Result.league == league_full[league], Result.model_type == model, Result.date >= time.strftime("%Y-%m-%d")).all()
+    # results = session.query(Result).filter(Result.league == league_full[league], Result.model_type == model).all()
+    print("Results:", results)
+    session.close()
+
+    if results:
+        return jsonify([result.as_dict() for result in results])
+    else:
+        return jsonify({"error": f"No results found for {model} - {league}"}), 404
+
 
 @app.route("/api/train-and-predict")
 def predict():

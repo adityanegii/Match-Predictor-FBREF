@@ -10,14 +10,14 @@ interface Model {
 }
 
 interface DataItem {
-  Date: string;
-  Home_Team: string;
-  Prob_Home_Win: number;
-  Prob_Draw: number;
-  Prob_Away_Win: number;
-  Away_Team: string;
-  Predicted_GF_Home: number;
-  Predicted_GF_Away: number;
+  date: string;
+  home_team: string;
+  home_win_prob: number;
+  draw_prob: number;
+  away_win_prob: number;
+  away_team: string;
+  predicted_GF_home: number;
+  predicted_GF_away: number;
 }
 
 interface TableProps {
@@ -73,12 +73,12 @@ const Table: React.FC<TableProps> = ({ league, model }) => {
           <tbody>
             {data.map((item, index) => (
               <tr key={index} className={styles.row}>
-                <td className={styles.cells}>{item.Date}</td>
-                <td className={styles.cells}>{item.Home_Team}</td>
+                <td className={styles.cells}>{item.date}</td>
+                <td className={styles.cells}>{item.home_team}</td>
                 <td className={styles.cells}>
-                  <ProbabilityBar home={item.Prob_Home_Win} draw={item.Prob_Draw} away={item.Prob_Away_Win} />
+                  <ProbabilityBar home={item.home_win_prob} draw={item.draw_prob} away={item.away_win_prob} />
                 </td>
-                <td className={styles.cells}>{item.Away_Team}</td>
+                <td className={styles.cells}>{item.away_team}</td>
               </tr>
             ))}
           </tbody>
@@ -101,10 +101,10 @@ const Table: React.FC<TableProps> = ({ league, model }) => {
         <tbody>
           {data.map((item, index) => (
             <tr key={index} className={styles.row}>
-              <td className={styles.cells}>{item.Date}</td>
-              <td className={styles.cells}>{item.Home_Team}</td>
-              <td className={styles.cells}>{item.Predicted_GF_Home}-{item.Predicted_GF_Away}</td>
-              <td className={styles.cells}>{item.Away_Team}</td>
+              <td className={styles.cells}>{item.date}</td>
+              <td className={styles.cells}>{item.home_team}</td>
+              <td className={styles.cells}>{item.predicted_GF_home}-{item.predicted_GF_away}</td>
+              <td className={styles.cells}>{item.away_team}</td>
             </tr>
           ))}
         </tbody>

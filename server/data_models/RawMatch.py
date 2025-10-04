@@ -20,6 +20,8 @@ class RawMatch(Base):
     formation = Column(String)
     opp_formation = Column(String)
     match_report = Column(String)
+    days_since_last_game = Column(Integer)
+    is_first_game = Column(Integer)
 
 
     # Defensive Actions
@@ -98,8 +100,6 @@ class RawMatch(Base):
     aerial_won = Column(Float)
     aerial_lost = Column(Float)
     aerial_won_pct = Column(Float)
-    days_since_last_game = Column(Integer)
-    is_first_game = Column(Integer)
 
     # Passing
     tot_pass_cmp = Column(Float)
