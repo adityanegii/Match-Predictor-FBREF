@@ -148,9 +148,9 @@ def train_and_predict():
                          'away_team': record['Away_Team'],
                          'league': league_full[league],
                          'model_type': type,
-                         'home_win_prob': record.get('Prob_Home_Win', None),
-                         'draw_prob': record.get('Prob_Draw', None),
-                         'away_win_prob': record.get('Prob_Away_Win', None),
+                         'home_win_prob': round(record.get('Prob_Home_Win', 0), 2) if record.get('Prob_Home_Win') is not None else None,
+                         'draw_prob': round(record.get('Prob_Draw', 0), 2) if record.get('Prob_Draw') is not None else None,
+                         'away_win_prob': round(record.get('Prob_Away_Win', 0), 2) if record.get('Prob_Away_Win') is not None else None,
                         } for record in records]
 
             # Save to db

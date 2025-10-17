@@ -6,7 +6,7 @@ import time
 from typing import Callable
 
 from helpers.scraper_helpers import parse_def, parse_gca, parse_gk, parse_misc, parse_pass, parse_passTypes, parse_poss, parse_shooting
-from constants import MATCH_FILE, HEADERS, current_year, CHROMEDRIVER_PATH
+from constants import MATCH_FILE, HEADERS, current_year
 from fake_useragent import UserAgent
 from data_models.RawMatch import RawMatch
 from sqlalchemy import insert, update, bindparam
@@ -16,14 +16,17 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+
+from webdriver_manager.chrome import ChromeDriverManager
 
 def open_chromedriver() -> webdriver.Chrome:
     chrome_options = Options()
     chrome_options.add_argument("--log-level=3 ") # Suppress logs
     chrome_options.add_experimental_option("excludeSwitches", ["enable-logging"])
-    service = Service(CHROMEDRIVER_PATH)
+    service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=chrome_options)
     return driver
 

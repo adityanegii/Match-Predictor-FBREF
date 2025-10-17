@@ -34,6 +34,11 @@ def soft_voting(models: list[str], league: str, session: sessionmaker):
     ensemble_probs[['home_win_prob', 'draw_prob', 'away_win_prob']] *= 100
     ensemble_probs = ensemble_probs.reset_index()
 
+    # Round to 2 decimal places
+    ensemble_probs[['home_win_prob', 'draw_prob', 'away_win_prob']] = (
+        ensemble_probs[['home_win_prob', 'draw_prob', 'away_win_prob']].round(2)
+    )
+
     # Setup to save to Result table
     ensemble_probs['model_type'] = 'Ensemble'
     ensemble_probs['league'] = league_full[league]

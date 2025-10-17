@@ -20,16 +20,11 @@ This Match Predictor is a Python-based tool that uses various classifiers and re
 ![Project Architecture](https://raw.github.com/adityanegii/Match-Predictor-FBREF/main/server/data/FBREF%20Match%20Predictor%20Diagram.png)
 
 ## Running
-
-First edit the constants.py file in the server directory to set the chromedriver path. You will need to install the chromedriver that matches your version of Chrome and your architecture (https://googlechromelabs.github.io/chrome-for-testing/).
-
 Open up a terminal and navigate to the directory where the project is located.
 
 First create a virtual environment using `python -m venv venv` on Windows or `python3 -m venv venv` on macOS or Linux and then activate it using `venv/scripts/activate` on Windows`source venv/bin/activate` for macOS and Linux. Then install the required libraries using `pip install -r requirements.txt`.
 
 Then navigate to the server directory and run the app.py file using `python app.py` on Windows or `python3 app.py` on macOS and Linux. This will start the server. Then in another terminal window navigate to the web client directory and run `npm install` to install the required libraries. Then run `npm run dev` to start the frontend. This will open up a browser window with the Match Predictor on `http://localhost:3000/`.
-
-I have included the predictions for one Matchweek for the Premier League, if you are interested in seeing the functionality of this project quickly and just seeing the display function. 
 
 If you want to see the predictions for the set of upcoming fixtures, press the "Scrape" button to retrieve the new data, then after the data has been scraped click the "Train Models" button to train and make predictions. This is still a feature I am working on to make faster and more efficient. If you just want to scrape for 1 league in particular, you can change the url to scrape in the `main.py` file in the scrape function. I have commented out the urls for the the top 5 leagues individually, and left the url for the whole top 5 leagues combined. Currently the initial scrape will take around 4-5 hours (for all the leagues), however the subsequent scrapes will only take 1/4-1/5 of the intial time. Instead of rescraping all the match data, with SQLite and SQLAlchemy, I store all the previous years if they are already present in the database, and only scrape the current year. So for only 1 league it should be ~1 hour for the initial scrape then 15-20 mins for the subsequent scrapes.
 
