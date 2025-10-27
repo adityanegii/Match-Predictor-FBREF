@@ -4,16 +4,34 @@ def get_predictors_basic():
     defense = ["int", "xga", "ga"]
     gk = ["sota", "saves", "save_pct", "psxg"]
 
-    base = attacking + defense + gk
-    home_stats = [f"{x}_home_rolling" for x in base] + [f"{x}_home_mean" for x in base]
-    away_stats = [f"{x}_away_rolling" for x in base] + [f"{x}_away_mean" for x in base]
-    home_stats = [f"{x}_home" for x in home_stats] + [f"{x}_away" for x in home_stats]
-    away_stats = [f"{x}_home" for x in away_stats] + [f"{x}_away" for x in away_stats]
-    overall_home = [f"{x}_rolling_home" for x in base] + [f"{x}_mean_home" for x in base]
-    overall_away = [f"{x}_rolling_away" for x in base] + [f"{x}_mean_away" for x in base]
-    predictors = [f"{x}_home" for x in general] + [f"{x}_away" for x in general] + home_stats + away_stats + overall_home + overall_away
-    return predictors
+    # add features relating to season performance (cum_pts), and result percentages (win_pct, draw_pct, loss_pct)
 
+    base = attacking + defense + gk
+
+    home_stats = [f"{x}_atHome_rolling" for x in base] + [f"{x}_atHome_mean" for x in base]
+    away_stats = [f"{x}_atAway_rolling" for x in base] + [f"{x}_atAway_mean" for x in base]
+
+    home_stats = [f"{x}_forHomeTeam" for x in home_stats] + [f"{x}_forAwayTeam" for x in home_stats]
+    away_stats = [f"{x}_forHomeTeam" for x in away_stats] + [f"{x}_forAwayTeam" for x in away_stats]
+
+    # Stats regardless of home/away
+    overall_home = [f"{x}_rolling_forHomeTeam" for x in base] + [f"{x}_mean_forHomeTeam" for x in base]
+    overall_away = [f"{x}_rolling_forAwayTeam" for x in base] + [f"{x}_mean_forAwayTeam" for x in base]
+
+    # Seasonal performance stats
+    szn_perf = ["szn_cum_pts", "szn_win_pct", "szn_draw_pct", "szn_loss_pct"]
+    
+    szn_perf_home_away = [f"{x}_atHome" for x in szn_perf] + [f"{x}_atAway" for x in szn_perf]
+    szn_perf_final = szn_perf + szn_perf_home_away
+    szn_perf_final = [f"{x}_forHomeTeam" for x in szn_perf_final] + [f"{x}_forAwayTeam" for x in szn_perf_final]
+
+
+    predictors = [f"{x}_forHomeTeam" for x in general] + [f"{x}_forAwayTeam" for x in general] + home_stats + away_stats + overall_home + overall_away + szn_perf_final
+
+    # Remove all predicotrs that contain forHomeTeam and atAway or forAwayTeam and atHome
+    predictors = [col for col in predictors if not (("forHomeTeam" in col and "atAway" in col) or ("forAwayTeam" in col and "atHome" in col))]
+
+    return predictors
 
 
 def get_predictors():

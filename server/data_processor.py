@@ -86,28 +86,6 @@ def clean_data(matches_df:pd.DataFrame) -> pd.DataFrame:
             opp_xg = opp_xg_lookup.get((row['opponent'], row['team'], row['date']), np.nan)
             matches_df.at[idx, 'xga'] = opp_xg if pd.notnull(opp_xg) else np.nan
 
-
-    # teams = matches_df['team'].unique().tolist()
-    # dfs = [matches_df[matches_df['team'] == x] for x in teams]
-    # dfs = [x.reset_index(drop=True) for x in dfs]
-
-    # valid_cols = matches_df.select_dtypes(include=['int8', 'int64', 'float64', 'int32']).columns.tolist()
-
-    # for df in dfs:
-    #     rows = df.index
-    #     for col in valid_cols:
-    #         for i in rows[:-1]:
-    #             value = df.at[i, col]
-    #             if pd.isnull(value):
-    #                 if i == 0:
-    #                     average = df[col].dropna().mean()
-    #                     df.at[i, col] = average 
-    #                 else:
-    #                     average = df[col][:i].dropna().mean()
-    #                     df.at[i, col] = average
-
-    # return pd.concat(dfs).sort_values(by=['team', 'date']).reset_index(drop=True)
-
     numeric_cols = matches_df.select_dtypes(include=['int8','int64','float64','int32']).columns
 
     def fill_team(df):
@@ -123,7 +101,7 @@ def clean_data(matches_df:pd.DataFrame) -> pd.DataFrame:
         .sort_values(['team', 'date'])
         .reset_index(drop=True)
     )
-
+    
     return matches_df
 
 def get_averages(final_matches: pd.DataFrame) -> pd.DataFrame:
@@ -149,21 +127,18 @@ def get_averages(final_matches: pd.DataFrame) -> pd.DataFrame:
         [
             final_matches, rolling_averages.add_suffix('_rolling'),
             overall_averages.add_suffix('_mean'), 
-            home_rolling_averages.add_suffix('_home_rolling'), 
-            away_rolling_averages.add_suffix('_away_rolling'), 
-            home_overall_averages.add_suffix('_home_mean'), 
-            away_overall_averages.add_suffix('_away_mean')
+            home_rolling_averages.add_suffix('_atHome_rolling'), 
+            away_rolling_averages.add_suffix('_atAway_rolling'), 
+            home_overall_averages.add_suffix('_atHome_mean'), 
+            away_overall_averages.add_suffix('_atAway_mean')
         ], 
         axis=1
     )
 
     # Handle NaN values
     # Rule 1: drop rows where ALL averages (home + away + general) are NaN
-    mask_all_nan = df.filter(like="_home_").isna().all(axis=1) & df.filter(like="_away_").isna().all(axis=1)
+    mask_all_nan = df.filter(like="_atHome_").isna().all(axis=1) & df.filter(like="_atAway_").isna().all(axis=1)
     df = df[~mask_all_nan]
-
-    # Get number of nan values:
-    num_nans = df.isna().sum().sum()
 
     # Rule 2: replace "structural" NaNs with 0 (e.g. away stats in home games)
     df = df.fillna(0)
@@ -178,50 +153,127 @@ def calculate_team_results_and_points(df:pd.DataFrame) -> pd.DataFrame:
     "draw": (df["pts"] == 1).astype(int),
     "loss": (df["pts"] == 0).astype(int)
     })
+
     df = pd.concat([df, results], axis=1)
 
     group = df.groupby(["season", "team"])
 
     # Calculate cumulative counts and sums
-    cum_cols = pd.DataFrame({
-        "cum_games": group.cumcount().replace(0, np.nan),
-        "cum_wins": group["win"].cumsum().shift(1, fill_value=0),
-        "cum_draws": group["draw"].cumsum().shift(1, fill_value=0),
-        "cum_losses": group["loss"].cumsum().shift(1, fill_value=0),
-        "cum_pts": group["pts"].cumsum().shift(1, fill_value=0)
+    szn_cum_cols = pd.DataFrame({
+        "szn_cum_games": group.cumcount().replace(0, np.nan),
+        "szn_cum_wins": group["win"].cumsum().shift(1, fill_value=0),
+        "szn_cum_draws": group["draw"].cumsum().shift(1, fill_value=0),
+        "szn_cum_losses": group["loss"].cumsum().shift(1, fill_value=0),
+        "szn_cum_pts": group["pts"].cumsum().shift(1, fill_value=0),
     })
+
+    # Get rolling stats (past 5 games)
+    szn_last_5_cols = pd.DataFrame()
+    szn_last_5_cols['szn_wins_last5'] = group['win'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    szn_last_5_cols['szn_draws_last5'] = group['draw'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    szn_last_5_cols['szn_losses_last5'] = group['loss'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    szn_last_5_cols['szn_pts_last5'] = group['pts'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
     
-    df = pd.concat([df, cum_cols], axis=1)
+    home_df = df[df["venue"] == "Home"]
+    away_df = df[df["venue"] == "Away"]
+
+    # Calculate home cumulative counts and sums
+    home_group = home_df.groupby(["season", "team"])
+    home_szn_cum_cols = pd.DataFrame({
+        "szn_cum_games_atHome": home_group.cumcount().replace(0, np.nan),
+        "szn_cum_wins_atHome": home_group["win"].cumsum().shift(1, fill_value=0),
+        "szn_cum_draws_atHome": home_group["draw"].cumsum().shift(1, fill_value=0),
+        "szn_cum_losses_atHome": home_group["loss"].cumsum().shift(1, fill_value=0),
+        "szn_cum_pts_atHome": home_group["pts"].cumsum().shift(1, fill_value=0),
+    })
+
+    # Get rolling stats (past 5 home games)
+    home_szn_last_5_cols = pd.DataFrame()
+    home_szn_last_5_cols['szn_wins_atHome_last5'] = home_group['win'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    home_szn_last_5_cols['szn_draws_atHome_last5'] = home_group['draw'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    home_szn_last_5_cols['szn_losses_atHome_last5'] = home_group['loss'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    home_szn_last_5_cols['szn_pts_atHome_last5'] = home_group['pts'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+
+    # Calculate away cumulative counts and sums
+    away_group = away_df.groupby(["season", "team"])
+    away_szn_cum_cols = pd.DataFrame({
+        "szn_cum_games_atAway": away_group.cumcount().replace(0, np.nan),
+        "szn_cum_wins_atAway": away_group["win"].cumsum().shift(1, fill_value=0),
+        "szn_cum_draws_atAway": away_group["draw"].cumsum().shift(1, fill_value=0),
+        "szn_cum_losses_atAway": away_group["loss"].cumsum().shift(1, fill_value=0),
+        "szn_cum_pts_atAway": away_group["pts"].cumsum().shift(1, fill_value=0),
+    })
+
+    # Get rolling stats (past 5 away games)
+    away_szn_last_5_cols = pd.DataFrame()
+    away_szn_last_5_cols['szn_wins_atAway_last5'] = away_group['win'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    away_szn_last_5_cols['szn_draws_atAway_last5'] = away_group['draw'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    away_szn_last_5_cols['szn_losses_atAway_last5'] = away_group['loss'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+    away_szn_last_5_cols['szn_pts_atAway_last5'] = away_group['pts'].rolling(window=WINDOW, min_periods=1, closed='left').mean().shift(1, fill_value=0).reset_index(level=0, drop=True)
+
+    # Combine all cumulative columns
+    df = pd.concat([df, szn_cum_cols], axis=1)
+    df = pd.concat([df, home_szn_cum_cols], axis=1)
+    df = pd.concat([df, away_szn_cum_cols], axis=1)
+
+    # df = pd.concat([df, szn_last_5_cols], axis=1)
+    # df = pd.concat([df, home_szn_last_5_cols], axis=1)
+    # df = pd.concat([df, away_szn_last_5_cols], axis=1)
 
     # Reset first match of each season for each team to 0
     first_rows = df.groupby(["season", "team"]).head(1).index
-    df.loc[first_rows, ["cum_games", "cum_wins", "cum_draws", "cum_losses", "cum_pts"]] = 0
+    df.loc[first_rows, ["szn_cum_games", "szn_cum_wins", "szn_cum_draws", "szn_cum_losses", "szn_cum_pts", 
+                        "szn_cum_games_atHome", "szn_cum_wins_atHome", "szn_cum_draws_atHome", "szn_cum_losses_atHome", "szn_cum_pts_atHome", 
+                        "szn_cum_games_atAway", "szn_cum_wins_atAway", "szn_cum_draws_atAway", "szn_cum_losses_atAway", "szn_cum_pts_atAway",
+                        ]] = 0
+    
+    # make rows for szn_cum_pts_atHome_forAwayTeam and szn_cum_pts_atAway_forHomeTeam equal to 0 for all values
+    df.loc[df["venue"] == "Home", "szn_cum_pts_atAway"] = 0
+    df.loc[df["venue"] == "Away", "szn_cum_pts_atHome"] = 0
 
     # Calculate percentages
     pct_cols = pd.DataFrame({
-        "win_pct": df["cum_wins"] / df["cum_games"],
-        "draw_pct": df["cum_draws"] / df["cum_games"],
-        "loss_pct": df["cum_losses"] / df["cum_games"]
+        "szn_win_pct": df["szn_cum_wins"] / df["szn_cum_games"],
+        "szn_draw_pct": df["szn_cum_draws"] / df["szn_cum_games"],
+        "szn_loss_pct": df["szn_cum_losses"] / df["szn_cum_games"],
+
+        "szn_win_pct_atHome": df["szn_cum_wins_atHome"] / df["szn_cum_games_atHome"],
+        "szn_draw_pct_atHome": df["szn_cum_draws_atHome"] / df["szn_cum_games_atHome"],
+        "szn_loss_pct_atHome": df["szn_cum_losses_atHome"] / df["szn_cum_games_atHome"],
+        
+        "szn_win_pct_atAway": df["szn_cum_wins_atAway"] / df["szn_cum_games_atAway"],
+        "szn_draw_pct_atAway": df["szn_cum_draws_atAway"] / df["szn_cum_games_atAway"],
+        "szn_loss_pct_atAway": df["szn_cum_losses_atAway"] / df["szn_cum_games_atAway"],
+
+        "szn_pts_per_game": df["szn_cum_pts"] / df["szn_cum_games"],
+        "szn_pts_per_game_atHome": df["szn_cum_pts_atHome"] / df["szn_cum_games_atHome"],
+        "szn_pts_per_game_atAway": df["szn_cum_pts_atAway"] / df["szn_cum_games_atAway"],
     })
 
-    df = pd.concat([df, pct_cols], axis=1)
-    
-    # Drop temporary columns
-    df.drop(columns=["win", "draw", "loss", "cum_games", "cum_wins", "cum_draws", "cum_losses"], inplace=True)
+    pct_cols = pct_cols.fillna(0)
 
-    df.to_csv("data/processed/temp.csv", index=False)  ### TO REMOVE
+    df = pd.concat([df, pct_cols], axis=1)
+    # df = pd.concat([df, pct_cols, rolling_cols], axis=1)
+    
+    df.to_csv("data/processed/temp.csv")
+    # Drop temporary columns
+    df.drop(columns=["win", "draw", "loss", 
+                    "szn_cum_games", "szn_cum_wins", "szn_cum_draws", "szn_cum_losses",
+                    "szn_cum_games_atHome", "szn_cum_wins_atHome", "szn_cum_draws_atHome", "szn_cum_losses_atHome",
+                    "szn_cum_games_atAway", "szn_cum_wins_atAway", "szn_cum_draws_atAway", "szn_cum_losses_atAway"], inplace=True)
+
     return df
 
 def combine(df:pd.DataFrame) -> pd.DataFrame:
     home_table = df[df["venue"] == "Home"].sort_values(by=['date', 'time', 'team'])
     away_table = df[df["venue"] == "Away"].sort_values(by=['date', 'time', 'opponent'])
-    home_table_renamed = home_table.rename(columns={"team": "home_team", "opponent": "away_team", "gf": "gf_home", "ga": "gf_away"})
-    away_table_renamed = away_table.rename(columns={"team": "away_team", "opponent": "home_team", "gf": "gf_away", "ga": "gf_home"})
+    home_table_renamed = home_table.rename(columns={"team": "home_team", "opponent": "away_team", "gf": "gf_forHomeTeam", "ga": "gf_forAwayTeam"})
+    away_table_renamed = away_table.rename(columns={"team": "away_team", "opponent": "home_team", "gf": "gf_forAwayTeam", "ga": "gf_forHomeTeam"})
 
-    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "comp", "round", "day", "season", "round", "time", "home_team", "away_team", "gf_home", "gf_away"], suffixes=("_home", "_away"))
+    merged_df = pd.merge(home_table_renamed, away_table_renamed, on=["date", "comp", "round", "day", "season", "round", "time", "home_team", "away_team", "gf_forHomeTeam", "gf_forAwayTeam"], suffixes=("_forHomeTeam", "_forAwayTeam"))
     merged_df['result_code'] = (
-        merged_df['gf_home'] > merged_df['gf_away']).astype(int) - (
-        merged_df['gf_home'] < merged_df['gf_away']).astype(int) + 1 # 2 for home team win, 1 for draw, 0 for away team win
+        merged_df['gf_forHomeTeam'] > merged_df['gf_forAwayTeam']).astype(int) - (
+        merged_df['gf_forHomeTeam'] < merged_df['gf_forAwayTeam']).astype(int) + 1 # 2 for home team win, 1 for draw, 0 for away team win
     
 
     return merged_df
@@ -233,9 +285,9 @@ def mark_promoted(df:pd.DataFrame) -> pd.DataFrame:
     filtered_df = df.loc[df["season"] != first_year].copy()
         
     # Create new columns for promoted teams
-    filtered_df.loc[:,"promoted_home"] = 0
-    filtered_df.loc[:,"promoted_away"] = 0
-    
+    filtered_df.loc[:,"promoted_forHomeTeam"] = 0
+    filtered_df.loc[:,"promoted_forAwayTeam"] = 0
+
     for year, teams in teams_per_year.items():
         if year == first_year:
             continue
@@ -245,7 +297,7 @@ def mark_promoted(df:pd.DataFrame) -> pd.DataFrame:
 
 
         for team in promoted_teams:
-            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["home_team"] == team), "promoted_home"] = 1
-            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["away_team"] == team), "promoted_away"] = 1
+            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["home_team"] == team), "promoted_forHomeTeam"] = 1
+            filtered_df.loc[(filtered_df["season"] == year) & (filtered_df["away_team"] == team), "promoted_forAwayTeam"] = 1
 
     return filtered_df

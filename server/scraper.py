@@ -6,7 +6,7 @@ import time
 from typing import Callable
 
 from helpers.scraper_helpers import parse_def, parse_gca, parse_gk, parse_misc, parse_pass, parse_passTypes, parse_poss, parse_shooting
-from constants import MATCH_FILE, HEADERS, current_year
+from constants import MATCH_FILE, HEADERS, CURRENT_YEAR
 from fake_useragent import UserAgent
 from data_models.RawMatch import RawMatch
 from sqlalchemy import insert, update, bindparam
@@ -53,6 +53,7 @@ def get_request(url: str, driver: webdriver.Chrome, wait_selector: str = "body",
     time.sleep(delay)
     return driver.page_source
 
+# Function that parses a URL and returns a DataFrame
 def parse_url(url: str, parse: Callable, text: str, driver: webdriver.Chrome) -> pd.DataFrame:
     while True:
         try:
@@ -81,9 +82,9 @@ def scrape(link: str, session: sessionmaker) -> pd.DataFrame:
     seasons = get_existing_seasons(session)
 
     if not seasons:
-        years = list(range(current_year, current_year - 4, - 1))
+        years = list(range(CURRENT_YEAR, CURRENT_YEAR - 4, - 1))
     else:
-        years = [current_year]
+        years = [CURRENT_YEAR]
 
     try:
         # Open ChromeDriver
