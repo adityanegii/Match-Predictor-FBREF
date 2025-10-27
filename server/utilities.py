@@ -1,4 +1,4 @@
-def get_predictors_basic():
+def get_predictors_basic() -> list:
     general = ["venue_code", "team_code", "day_code", "promoted", "days_since_last_game", "is_first_game"]
     attacking = ["gf", "xg", "sh", "sot", "npxg", "npxg_per_sh"]
     defense = ["int", "xga", "ga"]
@@ -34,7 +34,7 @@ def get_predictors_basic():
     return predictors
 
 
-def get_predictors():
+def get_predictors() -> list:
     general = ["venue_code", "team_code", "day_code", "promoted"]
     attacking = ["gf", "xg", "sh", "sot", "npxg", "npxg_per_sh"]
     # passing = ["totpasscmp", "totpassatt", "totpasscmp_pct", "totpassdist", "prgpassdist", "xag", "xa", "keypasses"]

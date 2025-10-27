@@ -111,7 +111,7 @@ def train_and_predict():
             continue
         # train and predict
         train_set = data[data['date'].dt.date < pd.Timestamp(DATE).date()]
-        
+    
         num_nans = train_set.isna().sum().sum()
 
         if num_nans > 0:
@@ -135,7 +135,7 @@ def train_and_predict():
             # predict_c(model, type, train_set, next_games, predictors, league, session)
 
             # Train on full data and predict next games
-            model.train_full(train_set, predictors)
+            model.train(train_set, predictors)
             r_df = model.predict(next_games, predictors)
             r_df['Predicted_Winner'] = r_df.apply(map_predicted_result, axis=1)
             r_df = r_df.drop('Predicted_Result', axis=1)

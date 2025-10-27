@@ -1,7 +1,8 @@
 match-predictor-venv/
 __pycache__/
 server/data/processed/
-server/data/raw
+server/data/raw/
+server/data/testing/
 clean_data.csv
 next_games.csv
 helper_notebooks/
