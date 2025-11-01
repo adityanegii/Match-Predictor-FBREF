@@ -1,0 +1,70 @@
+{
+  "random_forest": {
+    "n_estimators": 800,
+    "max_depth": null,
+    "min_samples_split": 25,
+    "min_samples_leaf": 12,
+    "max_features": "log2",
+    "bootstrap": true,
+    "class_weight": "balanced",
+    "random_state": 42
+  },
+  "xgboost": {
+    "n_estimators": 3200,
+    "learning_rate": 0.05,
+    "max_depth": 10,
+    "min_child_weight": 1,
+    "subsample": 0.6,
+    "colsample_bytree": 0.8,
+    "gamma": 0.3,
+    "reg_lambda": 1.5,
+    "reg_alpha": 0.5,
+    "random_state": 42
+  },
+  "logreg_1vR": {
+    "penalty": null,
+    "C": 1,
+    "solver": "lbfgs",
+    "max_iter": 1000,
+    "tol": 0.0001,
+    "class_weight": "balanced",
+    "fit_intercept": true,
+    "warm_start": true,
+    "random_state": 42
+  },
+  "logreg_1v1": {
+    "penalty": "l2",
+    "C": 10,
+    "solver": "sag",
+    "max_iter": 2000,
+    "tol": 0.01,
+    "class_weight": "balanced",
+    "fit_intercept": false,
+    "warm_start": true,
+    "random_state": 42
+  },
+  "svm_1vR": {
+    "C": 0.1,
+    "kernel": "sigmoid",
+    "degree": 4,
+    "gamma": 0.01,
+    "coef0": 0.5,
+    "shrinking": false,
+    "class_weight": "balanced",
+    "tol": 0.001,
+    "max_iter": 5000,
+    "random_state": 42
+  },
+  "svm_1v1": {
+    "C": 0.01,
+    "kernel": "poly",
+    "degree": 2,
+    "gamma": "scale",
+    "coef0": 1,
+    "shrinking": false,
+    "class_weight": "balanced",
+    "tol": 0.0001,
+    "max_iter": 2000,
+    "random_state": 42
+  }
+}

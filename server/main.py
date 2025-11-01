@@ -12,13 +12,14 @@ from models.classification.SVC import SVCWrapper
 from models.classification.LR import LRWrapper
 
 import pandas as pd
+import numpy as np
 
 from database import SessionLocal
 from data_models.Result import Result
 from data_models.RawMatch import RawMatch
 from sqlalchemy.dialects.sqlite import insert
 
-import numpy as np
+import json
 
 from utilities import get_predictors, map_predicted_result
 
@@ -119,16 +120,23 @@ def train_and_predict():
 
         next_games = data[data['date'].dt.date >= pd.Timestamp(DATE).date()]
 
-        rfc = RFC()
-        # rfr = RFR()
-        xgbc = XGBC()
-        # xgbr = XGBR()
-        svc = SVCWrapper()
-        lr = LRWrapper()
+        # Load params
+        with open('params.json', 'r') as f:
+            params = json.load(f)
 
-        models_c = [rfc, xgbc, svc, lr]
+        rfc = RFC(**params['random_forest'])
+        # rfr = RFR()
+        xgbc = XGBC(**params['xgboost'])
+        # xgbr = XGBR()
+        svc = SVCWrapper(**params['svm_1vR'], one_vs_rest=True)
+        svc_1v1 = SVCWrapper(**params['svm_1v1'])
+        lr = LRWrapper(**params['logreg_1vR'], one_vs_rest=True)
+        lr_1v1 = LRWrapper(**params['logreg_1v1'])
+
+
+        models_c = [rfc, xgbc, svc, lr, svc_1v1, lr_1v1]
         # models_r = [rfr, xgbr]
-        types_c = ["RFC", "XGBC", "SVC_1v1", "LR_1v1"]
+        types_c = ["RFC", "XGBC", "SVC_1vR", "LR_1vR", "SVC_1v1", "LR_1v1"]
         # types_r = ["RFR", "XGBR"]
 
         for model, type in zip(models_c, types_c):
