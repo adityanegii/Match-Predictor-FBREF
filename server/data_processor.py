@@ -278,6 +278,20 @@ def combine(df:pd.DataFrame) -> pd.DataFrame:
 
     return merged_df
 
+def add_diff_features(df:pd.DataFrame) -> pd.DataFrame:
+    df["xg_rolling_diff"] = abs(df["xg_rolling_forHomeTeam"] - df["xg_rolling_forAwayTeam"])
+    df["xg_mean_diff"] = abs(df["xg_mean_forHomeTeam"] - df["xg_mean_forAwayTeam"])
+    df["xa_rolling_diff"] = abs(df["xa_rolling_forHomeTeam"] - df["xa_rolling_forAwayTeam"])
+    df["xa_mean_diff"] = abs(df["xa_mean_forHomeTeam"] - df["xa_mean_forAwayTeam"])
+    df["xga_rolling_diff"] = abs(df["xga_rolling_forHomeTeam"] - df["xga_rolling_forAwayTeam"])
+    df["xga_mean_diff"] = abs(df["xga_mean_forHomeTeam"] - df["xga_mean_forAwayTeam"])
+    df["gf_rolling_diff"] = abs(df["gf_rolling_forHomeTeam"] - df["gf_rolling_forAwayTeam"])
+    df["gf_mean_diff"] = abs(df["gf_mean_forHomeTeam"] - df["gf_mean_forAwayTeam"])
+    df["ga_rolling_diff"] = abs(df["ga_rolling_forHomeTeam"] - df["ga_rolling_forAwayTeam"])
+    df["ga_mean_diff"] = abs(df["ga_mean_forHomeTeam"] - df["ga_mean_forAwayTeam"])
+
+    return df
+
 def mark_promoted(df:pd.DataFrame) -> pd.DataFrame:
     teams_per_year = df.groupby("season")["home_team"].unique()
     first_year = df["season"].min()

@@ -58,7 +58,7 @@ def process(league: str) -> pd.DataFrame:
         # Replace NaN values with 0 for all rows after DATE
         df.loc[df['date'].dt.date > pd.Timestamp(DATE).date(), :] = df.loc[df['date'].dt.date > pd.Timestamp(DATE).date(), :].fillna(0)
 
-        r_df = DP.mark_promoted(DP.combine(DP.calculate_team_results_and_points(DP.get_averages(DP.clean_data(df)))))
+        r_df = DP.mark_promoted(DP.add_diff_features(DP.combine(DP.calculate_team_results_and_points(DP.get_averages(DP.clean_data(df))))))
         r_df.to_csv("data/processed/process_" + league + ".csv", index=False)
     except Exception as e:
         print(f"Error processing {league}:\n{e}")
@@ -124,15 +124,16 @@ def train_and_predict():
         with open('params.json', 'r') as f:
             params = json.load(f)
 
-        rfc = RFC(**params['random_forest'])
-        # rfr = RFR()
-        xgbc = XGBC(**params['xgboost'])
-        # xgbr = XGBR()
-        svc = SVCWrapper(**params['svm_1vR'], one_vs_rest=True)
-        svc_1v1 = SVCWrapper(**params['svm_1v1'])
-        lr = LRWrapper(**params['logreg_1vR'], one_vs_rest=True)
-        lr_1v1 = LRWrapper(**params['logreg_1v1'])
-
+        try:
+            rfc = RFC(params['random_forest'])
+            xgbc = XGBC(params['xgboost'])
+            svc = SVCWrapper(params['svm_1vR'], one_vs_rest=True)
+            svc_1v1 = SVCWrapper(params['svm_1v1'])
+            lr = LRWrapper(params['logreg_1vR'], one_vs_rest=True)
+            lr_1v1 = LRWrapper(params['logreg_1v1'])
+        except Exception as e:
+            print(f"Error initializing models:\n{e}")
+            raise e
 
         models_c = [rfc, xgbc, svc, lr, svc_1v1, lr_1v1]
         # models_r = [rfr, xgbr]
@@ -142,13 +143,18 @@ def train_and_predict():
         for model, type in zip(models_c, types_c):
             # predict_c(model, type, train_set, next_games, predictors, league, session)
 
-            # Train on full data and predict next games
-            model.train(train_set, predictors)
-            r_df = model.predict(next_games, predictors)
-            r_df['Predicted_Winner'] = r_df.apply(map_predicted_result, axis=1)
-            r_df = r_df.drop('Predicted_Result', axis=1)
+            try:
+                # Train on full data and predict next games
+                model.train(train_set, predictors)
+                r_df = model.predict(next_games, predictors)
+                
+                r_df['Predicted_Winner'] = r_df.apply(map_predicted_result, axis=1)
+                r_df = r_df.drop('Predicted_Result', axis=1)
 
-            records = r_df.to_dict(orient='records')
+                records = r_df.to_dict(orient='records')
+            except Exception as e:
+                print(f"Error during prediction for {league} with model {type}:\n{e}")
+                continue
 
             # Change column names to match Result model
             records = [{ 'date': record['Date'],

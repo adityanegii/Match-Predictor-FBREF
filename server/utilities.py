@@ -4,7 +4,18 @@ def get_predictors_basic() -> list:
     defense = ["int", "xga", "ga"]
     gk = ["sota", "saves", "save_pct", "psxg"]
 
-    # add features relating to season performance (cum_pts), and result percentages (win_pct, draw_pct, loss_pct)
+    extra = [
+        "xg_rolling_diff",
+        "xg_mean_diff",
+        "xa_rolling_diff",
+        "xa_mean_diff",
+        "xga_rolling_diff",
+        "xga_mean_diff",
+        "gf_rolling_diff",
+        "gf_mean_diff",
+        "ga_rolling_diff",
+        "ga_mean_diff",
+    ]
 
     base = attacking + defense + gk
 
@@ -29,7 +40,7 @@ def get_predictors_basic() -> list:
     predictors = [f"{x}_forHomeTeam" for x in general] + [f"{x}_forAwayTeam" for x in general] + home_stats + away_stats + overall_home + overall_away + szn_perf_final
 
     # Remove all predicotrs that contain forHomeTeam and atAway or forAwayTeam and atHome
-    predictors = [col for col in predictors if not (("forHomeTeam" in col and "atAway" in col) or ("forAwayTeam" in col and "atHome" in col))]
+    predictors = [col for col in predictors if not (("forHomeTeam" in col and "atAway" in col) or ("forAwayTeam" in col and "atHome" in col))] + extra
 
     return predictors
 
