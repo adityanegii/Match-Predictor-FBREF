@@ -1,3 +1,12 @@
+## ⚠️ Project Status (Updated: 2026-01-21)
+
+**This project is currently not functional.**  
+The external data source it relies on has changed has had some major changes in terms of data availablility. A lot of the advanced stats are no longer available.
+
+As a result data scraping/ingestion will fail, causing the whole chain to fail. Furthermore the data available is not enough to make a model.
+
+The code is kept here for reference and learning purposes.
+
 # Match Predictor
 
 This Match Predictor is a Python-based tool that uses various classifiers and regression models to predict match results and scorelines. The models are trained on data scraped from FBREF, which provides comprehensive football statistics.
